@@ -67,9 +67,27 @@
   <div class="container text-center">
     <h2 class="mb-4">Experience Compassionate AI</h2>
     <p class="demo-subtitle mb-4">Start a conversation with our supportive AI companion</p>
+    
+    <!-- Lottie Animation Container -->
+    <div class="d-flex justify-content-center mb-4">
+      <div style="width: 300px; height: 300px; border-radius: 1rem; overflow: hidden; background: var(--card-bg); border: 1px solid var(--border-color);">
+        <dotlottie-player 
+          src="https://lottie.host/491da541-84e2-4b57-bdde-0c91b7ed981e/eTdZo5Ywkr.lottie" 
+          background="transparent" 
+          speed="1" 
+          style="width: 100%; height: 100%;" 
+          loop 
+          autoplay>
+        </dotlottie-player>
+      </div>
+    </div>
+    
     <a href="/chat" class="btn btn-primary btn-lg px-4">Start Chatting</a>
   </div>
 </section>
+
+<!-- Add the Lottie script at the bottom of your body -->
+<script src="https://unpkg.com/@dotlottie/player-component@2.7.12/dist/dotlottie-player.mjs" type="module"></script>
 
 <!-- Call to Action -->
 <section class="cta py-6">
