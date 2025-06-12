@@ -1,0 +1,85 @@
+<%- include('partials/header') %>
+
+<!-- Hero Section -->
+<section class="hero">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-lg-8">
+        <h1 class="display-3">Welcome to <span class="text-gradient">MindfulConnect</span></h1>
+        <p class="subtitle mb-4">Your AI-powered mental health support platform</p>
+        <div class="d-flex justify-content-center flex-wrap gap-3">
+          <a href="/auth/register" class="btn btn-primary btn-lg px-4">Get Started</a>
+          <a href="/dashboard" class="btn btn-dashboard-outline btn-lg px-4">Go to Dashboard</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Features Section -->
+<section class="features py-6">
+  <div class="container">
+    <div class="section-heading mb-6 text-center">
+      <h2>Why Choose MindfulConnect?</h2>
+      <p class="section-subtitle">Compassionate support powered by technology</p>
+    </div>
+    <div class="row g-4">
+      <div class="col-md-4">
+        <div class="feature-card fade-in h-100">
+          <div class="card-body text-center p-4">
+            <div class="icon-wrapper mb-4">
+              <i class="fas fa-robot fa-3x text-gradient"></i>
+            </div>
+            <h3 class="feature-title">AI-Powered Support</h3>
+            <p class="feature-text">Get instant, empathetic responses from our advanced AI chat system.</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="feature-card fade-in h-100" style="animation-delay: 0.2s;">
+          <div class="card-body text-center p-4">
+            <div class="icon-wrapper mb-4">
+              <i class="fas fa-users fa-3x text-gradient"></i>
+            </div>
+            <h3 class="feature-title">Community Support</h3>
+            <p class="feature-text">Connect with others and share experiences in our supportive community.</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="feature-card fade-in h-100" style="animation-delay: 0.4s;">
+          <div class="card-body text-center p-4">
+            <div class="icon-wrapper mb-4">
+              <i class="fas fa-book fa-3x text-gradient"></i>
+            </div>
+            <h3 class="feature-title">Resources</h3>
+            <p class="feature-text">Access curated mental health resources and self-help materials.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Demo Section -->
+<section class="demo py-5 bg-dark-2">
+  <div class="container text-center">
+    <h2 class="mb-4">Experience Compassionate AI</h2>
+    <p class="demo-subtitle mb-4">Start a conversation with our supportive AI companion</p>
+    <a href="/chat" class="btn btn-primary btn-lg px-4">Start Chatting</a>
+  </div>
+</section>
+
+<!-- Call to Action -->
+<section class="cta py-6">
+  <div class="container text-center">
+    <h2 class="mb-4">Ready to Start Your Journey?</h2>
+    <p class="cta-subtitle mb-4">Join our community and take the first step towards better mental health.</p>
+    <div class="d-flex justify-content-center flex-wrap gap-3">
+      <a href="/auth/register" class="btn btn-primary btn-lg px-4">Sign Up Now</a>
+      <a href="/dashboard" class="btn btn-dashboard-outline btn-lg px-4">Go to Dashboard</a>
+    </div>
+  </div>
+</section>
+
+<%- include('partials/footer') %>

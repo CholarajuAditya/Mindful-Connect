@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>MindfulConnect</title>
+        <link rel="stylesheet" href="/css/chat.css" />
+    </head>
+    <body class="dark">
+        <div class="chat-wrapper">
+            <header>
+                <h1>MindfulConnect</h1>
+            </header>
+
+            <main class="chat-box">
+                <% if (messages && messages.length) { %> <%
+                messages.forEach(function(msg) { %> <% if (msg.sender ===
+                'user') { %>
+                <div class="message user">
+                    <strong>You</strong>
+                    <p><%= msg.content %></p>
+                </div>
+                <% } else if (msg.sender === 'bot') { %>
+                <div class="message bot">
+                    <strong>MindfulBot</strong>
+                    <p><%= msg.content %></p>
+                </div>
+                <% } %> <% }); %> <% } else { %>
+                <p class="intro">
+                    Start the conversation to improve your peace of mind
+                </p>
+                <% } %>
+
+                <div id="loading" class="message bot" style="display: none;">
+                    <strong>MindfulBot</strong>
+                    <p>Thinking<span class="dots">...</span></p>
+                </div>
+            </main>
+
+            <form action="/chat" method="POST" class="chat-input">
+                <input
+                    type="text"
+                    name="userInput"
+                    placeholder="Ask MindfulBot..."
+                    required
+                    autocomplete="off"
+                />
+                <button type="button" id="clearBtn" title="Clear conversation">
+                    ✕
+                </button>
+                <button type="submit">→</button>
+            </form>
+            <button class="logout-btn">
+                <a href="/auth/logout">Logout</a>
+            </button>
+        </div>
+
+        <script>
+            const form = document.querySelector('form');
+            const input = document.querySelector('input[name="userInput"]');
+            const loading = document.getElementById('loading');
+            const chatBox = document.querySelector('.chat-box');
+
+            // Smooth scroll to bottom when new messages appear
+            function scrollToBottom() {
+              chatBox.scrollTo({
+                top: chatBox.scrollHeight,
+                behavior: 'smooth'
+              });
+            }
+
+            form.addEventListener('submit', (e) => {
+              if (!input.value.trim()) {
+                e.preventDefault();
+                showError("Please enter a message");
+              } else {
+                loading.style.display = 'block';
+                scrollToBottom();
+              }
+            });
+
+            function showError(msg) {
+              let existing = document.querySelector(".error-msg");
+              if (existing) existing.remove();
+
+              const error = document.createElement("div");
+              error.className = "error-msg";
+              error.textContent = msg;
+              form.parentNode.insertBefore(error, form);
+            }
+
+            document.getElementById("clearBtn").addEventListener("click", async () => {
+              if (confirm("Clear conversation history?")) {
+                try {
+                  const response = await fetch('/clear-chat', {
+                    method: 'POST',
+                    headers: {
+                      'Content-Type': 'application/json'
+                    }
+                  });
+
+                  if (response.ok) {
+                    window.location.reload(); // Refresh to show empty chat
+                  } else {
+                    showError("Failed to clear chat history");
+                  }
+                } catch (error) {
+                  showError("Error clearing chat history");
+                }
+              }
+            });
+
+            scrollToBottom();
+        </script>
+    </body>
+</html>

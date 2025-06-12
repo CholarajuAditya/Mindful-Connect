@@ -1,0 +1,259 @@
+/* Auth Form Password Field with Toggle */
+.password-field {
+  position: relative;
+  margin-bottom: 1rem;
+}
+
+.password-toggle-btn {
+  position: absolute;
+  right: 12px;
+  top: 37px;
+  /* Perfectly aligned with input field */
+  transform: translateY(-50%);
+  background: transparent;
+  border: none;
+  color: var(--light-text);
+  cursor: pointer;
+  padding: 0.5rem;
+  transition: all 0.2s ease;
+  z-index: 5;
+}
+
+.password-toggle-btn:hover {
+  color: var(--primary-color);
+}
+
+/* Theme-specific adjustments */
+[data-theme="dark"] .password-toggle-btn {
+  color: var(--light-text);
+}
+
+[data-theme="dark"] .password-toggle-btn:hover {
+  color: var(--accent-color);
+}
+
+[data-theme="light"] .password-toggle-btn {
+  color: var(--light-text);
+}
+
+[data-theme="light"] .password-toggle-btn:hover {
+  color: var(--secondary-color);
+}
+
+/* Auth Links Styling - Theme Aware */
+.auth-switch-container {
+  text-align: center;
+  margin-top: 1.5rem;
+}
+
+.auth-switch-text {
+  color: var(--light-text);
+  margin-bottom: 0.5rem;
+}
+
+.auth-switch-link {
+  color: var(--primary-color);
+  text-decoration: none;
+  font-weight: 500;
+  transition: all 0.2s ease;
+  display: inline-block;
+  padding: 0.25rem 0.5rem;
+  border-radius: 0.5rem;
+}
+
+.auth-switch-link:hover {
+  color: var(--accent-color);
+  background: rgba(139, 92, 246, 0.1);
+  transform: translateY(-1px);
+}
+
+[data-theme="light"] .auth-switch-link {
+  color: var(--secondary-color);
+}
+
+[data-theme="light"] .auth-switch-link:hover {
+  color: var(--primary-color);
+  background: rgba(124, 58, 237, 0.1);
+}
+
+/* Form Validation Styling */
+.invalid-feedback {
+  font-size: 0.85rem;
+  margin-top: 0.25rem;
+  color: #dc3545;
+  /* Keeping standard red for errors */
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+  .auth-card .card-body {
+    padding: 1.5rem;
+  }
+
+  .password-toggle-btn {
+    top: 35px;
+    right: 10px;
+  }
+}
+
+@media (max-width: 576px) {
+  .auth-card {
+    border: none;
+    background: transparent;
+    box-shadow: none;
+  }
+
+  .auth-card .card-body {
+    padding: 1rem 0;
+  }
+
+  .password-toggle-btn {
+    right: 8px;
+    top: 33px;
+    padding: 0.4rem;
+  }
+
+  .auth-switch-link {
+    padding: 0.2rem 0.4rem;
+  }
+}
+
+/* Auth Form Borders - Explicit Visible Styling */
+.auth-form .form-control {
+  background-color: var(--card-bg);
+  border: 1px solid var(--border-color);
+  color: var(--text-color);
+  padding: 0.75rem 1rem;
+  border-radius: 0.75rem;
+  transition: all 0.3s ease;
+}
+
+/* Light Theme - Clear Visible Borders */
+[data-theme="light"] .auth-form .form-control {
+  border: 1px solid #d1d5db;
+  /* Explicit light gray border */
+  box-shadow: none;
+  /* Remove any shadow */
+}
+
+/* Dark Theme - Subtle Borders */
+[data-theme="dark"] .auth-form .form-control {
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  /* Visible but subtle */
+}
+
+/* Cards - Explicit Borders */
+.auth-card {
+  border: 1px solid var(--border-color);
+}
+
+[data-theme="light"] .auth-card {
+  border: 1px solid #e5e7eb;
+  /* Light gray border */
+  box-shadow: none;
+  /* No shadow */
+}
+
+[data-theme="dark"] .auth-card {
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  /* Visible border */
+}
+
+/* Focus States - Clear Visual Feedback */
+.auth-form .form-control:focus {
+  border-color: var(--primary-color);
+  box-shadow: none;
+  /* Remove shadow */
+  outline: 2px solid var(--primary-color);
+  /* Thicker outline */
+  outline-offset: 1px;
+}
+
+/* Password Toggle Button */
+.password-toggle-btn {
+  right: 12px;
+  top: 50%;
+  transform: translateY(6px);
+  /* Perfect alignment */
+  color: var(--light-text);
+}
+
+[data-theme="light"] .password-toggle-btn {
+  color: #6b7280;
+  /* Darker icon for visibility */
+}
+
+/* Hide green checkmark and valid styles */
+.auth-form .form-control:valid {
+  background-image: none !important;
+  border-color: #ced4da !important;
+  /* optional: resets to default */
+  box-shadow: none !important;
+}
+
+/* error message animation */
+.error-banner {
+  background-color: #ffebee;
+  /* Light red background */
+  color: #c62828;
+  /* Darker red text */
+  padding: 15px 20px;
+  margin: 20px auto 0;
+  max-width: 600px;
+  border-radius: 4px;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  overflow: hidden;
+  animation: fadeIn 0.3s ease-in-out;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  /* Optional: subtle shadow */
+}
+
+.error-banner::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 4px;
+  background-color: #c62828;
+  animation: progressBar 5s linear forwards;
+}
+
+/* Keep the rest of your CSS the same */
+@keyframes progressBar {
+  0% {
+    width: 100%;
+  }
+
+  100% {
+    width: 0%;
+  }
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeOut {
+  0% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
+  }
+}
+
+.auth-container {
+  margin-top: 20px;
+}

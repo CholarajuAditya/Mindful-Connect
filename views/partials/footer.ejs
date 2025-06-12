@@ -1,0 +1,86 @@
+<footer class="footer mt-auto">
+  <div class="container">
+    <div class="row g-4">
+      <!-- Brand Column -->
+      <div class="col-lg-4">
+        <h5 class="mb-3 text-gradient">MindfulConnect</h5>
+        <p class="footer-text">Your AI-powered mental health support platform providing compassionate care and resources.</p>
+        <div class="social-links mt-3">
+          <a href="#" class="footer-link me-3"><i class="fab fa-twitter fa-lg"></i></a>
+          <a href="#" class="footer-link me-3"><i class="fab fa-instagram fa-lg"></i></a>
+          <a href="#" class="footer-link me-3"><i class="fab fa-github fa-lg"></i></a>
+          <a href="#" class="footer-link"><i class="fab fa-discord fa-lg"></i></a>
+        </div>
+      </div>
+
+      <!-- Quick Links -->
+      <div class="col-6 col-md-3 col-lg-2">
+        <h6 class="footer-heading mb-3">Quick Links</h6>
+        <ul class="list-unstyled">
+          <li class="mb-2"><a href="/" class="footer-link">Home</a></li>
+          <li class="mb-2"><a href="/features" class="footer-link">Features</a></li>
+          <li class="mb-2"><a href="/chat" class="footer-link">AI Chat</a></li>
+          <li class="mb-2"><a href="/resources" class="footer-link">Resources</a></li>
+        </ul>
+      </div>
+
+      <!-- Support -->
+      <div class="col-6 col-md-3 col-lg-2">
+        <h6 class="footer-heading mb-3">Support</h6>
+        <ul class="list-unstyled">
+          <li class="mb-2"><a href="/faq" class="footer-link">FAQ</a></li>
+          <li class="mb-2"><a href="/contact" class="footer-link">Contact</a></li>
+          <li class="mb-2"><a href="/privacy" class="footer-link">Privacy</a></li>
+          <li class="mb-2"><a href="/terms" class="footer-link">Terms</a></li>
+        </ul>
+      </div>
+
+      <!-- Newsletter -->
+      <div class="col-md-6 col-lg-4">
+        <h6 class="footer-heading mb-3">Stay Updated</h6>
+        <p class="footer-text">Subscribe to our newsletter for mental health tips and updates.</p>
+        <form class="mt-3">
+          <div class="input-group mb-3">
+            <input type="email" class="form-control bg-transparent text-light" placeholder="Your email" aria-label="Your email">
+            <button class="btn btn-primary" type="button">Subscribe</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <hr class="my-4 border-color">
+
+    <div class="row align-items-center">
+      <div class="col-md-6 text-center text-md-start">
+        <p class="mb-0 footer-text">&copy; <%= new Date().getFullYear() %> MindfulConnect. All rights reserved.</p>
+      </div>
+      <div class="col-md-6 text-center text-md-end">
+       <button id="headerThemeToggle" class="theme-toggle-btn btn btn-sm btn-outline border-0">
+  <i class="fas fa-moon"></i> <span class="d-none d-sm-inline">Toggle Theme</span>
+</button>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- Back to Top Button -->
+<button id="backToTop" class="btn btn-primary rounded-circle shadow back-to-top">
+  <i class="fas fa-arrow-up"></i>
+</button>
+
+<script>
+  // Back to Top Button
+  const backToTopButton = document.getElementById('backToTop');
+  
+  window.addEventListener('scroll', () => {
+    if (window.pageYOffset > 300) {
+      backToTopButton.classList.add('show');
+    } else {
+      backToTopButton.classList.remove('show');
+    }
+  });
+  
+  backToTopButton.addEventListener('click', () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+</script>

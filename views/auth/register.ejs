@@ -1,0 +1,172 @@
+<%- include('../partials/header') %>
+<link href="/css/auth.css" rel="stylesheet" />
+
+<!-- error banner -->
+<% if (typeof error !== "undefined") { %>
+
+<div class="error-banner"><%= error %></div>
+<% } %>
+<div class="auth-container">
+    <div class="container py-5">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <div class="auth-card shadow-sm">
+                    <div class="card-body p-4">
+                        <h2 class="text-center mb-4">Register</h2>
+
+                        <form
+                            action="/auth/register"
+                            method="POST"
+                            class="auth-form needs-validation"
+                            novalidate
+                        >
+                            <div class="mb-3">
+                                <label for="name" class="form-label"
+                                    >Full Name</label
+                                >
+                                <input
+                                    type="text"
+                                    class="form-control"
+                                    id="name"
+                                    name="name"
+                                    required
+                                />
+                                <div class="invalid-feedback">
+                                    Please enter your name.
+                                </div>
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="email" class="form-label"
+                                    >Email address</label
+                                >
+                                <input
+                                    type="email"
+                                    class="form-control"
+                                    id="email"
+                                    name="email"
+                                    required
+                                />
+                                <div class="invalid-feedback">
+                                    Please enter a valid email address.
+                                </div>
+                            </div>
+
+                            <div class="mb-3 password-field">
+                                <label for="password" class="form-label"
+                                    >Password</label
+                                >
+                                <input
+                                    type="password"
+                                    class="form-control"
+                                    id="password"
+                                    name="password"
+                                    required
+                                    minlength="6"
+                                />
+                                <button
+                                    type="button"
+                                    class="password-toggle-btn"
+                                    aria-label="Toggle password visibility"
+                                >
+                                    <i class="fas fa-eye"></i>
+                                </button>
+                                <div class="invalid-feedback">
+                                    Password must be at least 6 characters.
+                                </div>
+                            </div>
+
+                            <div class="mb-3 password-field">
+                                <label for="confirmPassword" class="form-label"
+                                    >Confirm Password</label
+                                >
+                                <input
+                                    type="password"
+                                    class="form-control"
+                                    id="confirmPassword"
+                                    name="confirmPassword"
+                                    required
+                                />
+                                <button
+                                    type="button"
+                                    class="password-toggle-btn"
+                                    aria-label="Toggle password visibility"
+                                >
+                                    <i class="fas fa-eye"></i>
+                                </button>
+                                <div class="invalid-feedback">
+                                    Passwords must match.
+                                </div>
+                            </div>
+
+                            <div class="d-grid gap-2 mt-4">
+                                <button
+                                    type="submit"
+                                    class="btn btn-primary btn-lg"
+                                >
+                                    Register
+                                </button>
+                            </div>
+                        </form>
+
+                        <div class="auth-switch-container">
+                            <p class="auth-switch-text">
+                                Already have an account?
+                            </p>
+                            <a href="/auth/login" class="auth-switch-link"
+                                >Login here</a
+                            >
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<%- include('../partials/footer') %>
+
+<script>
+        // Password toggle functionality
+        document.querySelectorAll('.password-toggle-btn').forEach(button => {
+            button.addEventListener('click', function() {
+                const icon = this.querySelector('i');
+                const input = this.parentElement.querySelector('input');
+                const type = input.getAttribute('type') === 'password' ? 'text' : 'password';
+                input.setAttribute('type', type);
+                icon.classList.toggle('fa-eye');
+                icon.classList.toggle('fa-eye-slash');
+                this.setAttribute('aria-label',
+                    type === 'password' ? 'Show password' : 'Hide password');
+            });
+        });
+
+        // Password confirmation validation
+        const password = document.getElementById('password');
+        const confirmPassword = document.getElementById('confirmPassword');
+
+        function validatePassword() {
+            if (password.value !== confirmPassword.value) {
+                confirmPassword.setCustomValidity("Passwords don't match");
+            } else {
+                confirmPassword.setCustomValidity('');
+            }
+        }
+
+        password.addEventListener('input', validatePassword);
+        confirmPassword.addEventListener('input', validatePassword);
+
+        // Error banner auto-dismiss
+    const errorBanner = document.querySelector('.error-banner');
+    if (errorBanner) {
+        // Start fade out slightly before the progress bar finishes
+        setTimeout(() => {
+            errorBanner.style.animation = 'fadeOut 0.5s ease-in-out forwards';
+        }, 4500); // 4.5 seconds (0.5s before the progress bar finishes)
+
+        // Remove the element after animations complete
+        setTimeout(() => {
+            errorBanner.remove();
+        }, 5000); // 5 seconds total
+    }
+</script>
