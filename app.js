@@ -6,6 +6,7 @@ import { fileURLToPath } from "url";
 import dotenv from "dotenv";
 import chatRoutes from "./routes/chat.js";
 import authRoutes from "./routes/auth.js";
+import developersRoutes from "./routes/developers.js";
 
 // Configure dotenv
 dotenv.config();
@@ -36,6 +37,7 @@ app.set("views", path.join(__dirname, "views"));
 // Routes
 app.use("/", chatRoutes);
 app.use("/auth", authRoutes);
+app.use("/developers", developersRoutes);
 
 console.log(
     "API Key:",
