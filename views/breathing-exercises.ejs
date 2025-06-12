@@ -1,0 +1,309 @@
+<%- include('partials/header-logged-in') %>
+
+<!-- Hero Section -->
+<section class="hero">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-lg-10 text-center">
+        <h1 class="display-3">Breathing <span class="text-gradient">Exercises</span></h1>
+        <p class="subtitle mb-4">Take a moment to breathe and find your calm</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Breathing Exercise Container -->
+<section class="features py-6">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-lg-8">
+        <!-- Exercise Selection -->
+        <div class="feature-card mb-4">
+          <div class="card-body p-4">
+            <h2 class="h3 mb-4 text-center">Choose Your Exercise</h2>
+            <div class="row g-3">
+              <div class="col-md-4">
+                <div class="exercise-option" data-exercise="box">
+                  <i class="fas fa-square fa-2x mb-2"></i>
+                  <h3 class="h5">Box Breathing</h3>
+                  <p class="small">4-4-4-4 rhythm</p>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="exercise-option" data-exercise="calm">
+                  <i class="fas fa-heart fa-2x mb-2"></i>
+                  <h3 class="h5">Calming Breath</h3>
+                  <p class="small">4-7-8 technique</p>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="exercise-option" data-exercise="relax">
+                  <i class="fas fa-spa fa-2x mb-2"></i>
+                  <h3 class="h5">Relaxing Breath</h3>
+                  <p class="small">6-2-7 rhythm</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Breathing Animation -->
+        <div class="feature-card">
+          <div class="card-body p-4">
+            <div class="text-center mb-4">
+              <h2 class="h3" id="exerciseTitle">Select an Exercise</h2>
+              <p class="text-muted" id="exerciseDescription">Choose a breathing technique to begin</p>
+            </div>
+            
+            <div class="breathing-container text-center">
+              <div class="breathing-circle" id="breathingCircle">
+                <div class="breathing-text" id="breathingText">Breathe</div>
+              </div>
+            </div>
+
+            <div class="text-center mt-4">
+              <button class="btn btn-primary" id="startButton" disabled>
+                <i class="fas fa-play me-2"></i>Start Exercise
+              </button>
+              <button class="btn btn-outline-primary ms-2" id="resetButton" disabled>
+                <i class="fas fa-redo me-2"></i>Reset
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Exercise Instructions -->
+<section class="features py-6">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-lg-8">
+        <div class="feature-card">
+          <div class="card-body p-4">
+            <h2 class="h3 mb-4 text-center">Exercise Instructions</h2>
+            <div id="boxInstructions" class="exercise-instructions">
+              <h3 class="h5">Box Breathing</h3>
+              <p>This technique helps reduce stress and improve focus:</p>
+              <ol>
+                <li>Breathe in for 4 seconds</li>
+                <li>Hold for 4 seconds</li>
+                <li>Exhale for 4 seconds</li>
+                <li>Hold for 4 seconds</li>
+              </ol>
+              <p>Repeat this cycle for 5-10 minutes.</p>
+            </div>
+            <div id="calmInstructions" class="exercise-instructions d-none">
+              <h3 class="h5">Calming Breath (4-7-8)</h3>
+              <p>This technique helps reduce anxiety and promote sleep:</p>
+              <ol>
+                <li>Breathe in through your nose for 4 seconds</li>
+                <li>Hold your breath for 7 seconds</li>
+                <li>Exhale through your mouth for 8 seconds</li>
+              </ol>
+              <p>Repeat this cycle 4 times.</p>
+            </div>
+            <div id="relaxInstructions" class="exercise-instructions d-none">
+              <h3 class="h5">Relaxing Breath</h3>
+              <p>This technique helps release tension:</p>
+              <ol>
+                <li>Breathe in for 6 seconds</li>
+                <li>Hold for 2 seconds</li>
+                <li>Exhale for 7 seconds</li>
+              </ol>
+              <p>Repeat this cycle for 5-10 minutes.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+.exercise-option {
+  text-align: center;
+  padding: 1.5rem;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  background-color: var(--bs-dark);
+  color: var(--bs-light);
+}
+
+.exercise-option:hover {
+  transform: translateY(-5px);
+  background-color: var(--bs-primary);
+}
+
+.exercise-option.selected {
+  background-color: var(--bs-primary);
+}
+
+.breathing-container {
+  height: 300px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.breathing-circle {
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  background-color: var(--bs-primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.5s ease;
+}
+
+.breathing-text {
+  color: white;
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.exercise-instructions {
+  padding: 1rem;
+  border-radius: 0.5rem;
+  background-color: var(--bs-dark);
+}
+
+.exercise-instructions ol {
+  margin-left: 1.5rem;
+  margin-top: 1rem;
+}
+
+.exercise-instructions li {
+  margin-bottom: 0.5rem;
+}
+</style>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const exerciseOptions = document.querySelectorAll('.exercise-option');
+    const startButton = document.getElementById('startButton');
+    const resetButton = document.getElementById('resetButton');
+    const breathingCircle = document.getElementById('breathingCircle');
+    const breathingText = document.getElementById('breathingText');
+    const exerciseTitle = document.getElementById('exerciseTitle');
+    const exerciseDescription = document.getElementById('exerciseDescription');
+    const instructions = document.querySelectorAll('.exercise-instructions');
+
+    let currentExercise = null;
+    let isExercising = false;
+    let animationInterval = null;
+
+    const exercises = {
+        box: {
+            title: 'Box Breathing',
+            description: '4-4-4-4 rhythm',
+            phases: [
+                { text: 'Breathe In', duration: 4000 },
+                { text: 'Hold', duration: 4000 },
+                { text: 'Breathe Out', duration: 4000 },
+                { text: 'Hold', duration: 4000 }
+            ]
+        },
+        calm: {
+            title: 'Calming Breath',
+            description: '4-7-8 technique',
+            phases: [
+                { text: 'Breathe In', duration: 4000 },
+                { text: 'Hold', duration: 7000 },
+                { text: 'Breathe Out', duration: 8000 }
+            ]
+        },
+        relax: {
+            title: 'Relaxing Breath',
+            description: '6-2-7 rhythm',
+            phases: [
+                { text: 'Breathe In', duration: 6000 },
+                { text: 'Hold', duration: 2000 },
+                { text: 'Breathe Out', duration: 7000 }
+            ]
+        }
+    };
+
+    exerciseOptions.forEach(option => {
+        option.addEventListener('click', function() {
+            const exercise = this.dataset.exercise;
+            
+            // Update UI
+            exerciseOptions.forEach(opt => opt.classList.remove('selected'));
+            this.classList.add('selected');
+            
+            // Show instructions
+            instructions.forEach(inst => inst.classList.add('d-none'));
+            document.getElementById(`${exercise}Instructions`).classList.remove('d-none');
+            
+            // Update exercise info
+            currentExercise = exercise;
+            exerciseTitle.textContent = exercises[exercise].title;
+            exerciseDescription.textContent = exercises[exercise].description;
+            
+            // Enable buttons
+            startButton.disabled = false;
+            resetButton.disabled = false;
+            
+            // Reset animation
+            resetAnimation();
+        });
+    });
+
+    startButton.addEventListener('click', function() {
+        if (!currentExercise) return;
+        
+        isExercising = !isExercising;
+        this.innerHTML = isExercising ? 
+            '<i class="fas fa-pause me-2"></i>Pause' : 
+            '<i class="fas fa-play me-2"></i>Start Exercise';
+        
+        if (isExercising) {
+            startAnimation();
+        } else {
+            clearInterval(animationInterval);
+        }
+    });
+
+    resetButton.addEventListener('click', resetAnimation);
+
+    function startAnimation() {
+        let currentPhase = 0;
+        const phases = exercises[currentExercise].phases;
+        
+        function animate() {
+            const phase = phases[currentPhase];
+            breathingText.textContent = phase.text;
+            
+            // Animate circle
+            if (phase.text === 'Breathe In') {
+                breathingCircle.style.transform = 'scale(1.5)';
+            } else if (phase.text === 'Breathe Out') {
+                breathingCircle.style.transform = 'scale(1)';
+            }
+            
+            currentPhase = (currentPhase + 1) % phases.length;
+        }
+        
+        // Start with first phase
+        animate();
+        
+        // Set interval for subsequent phases
+        animationInterval = setInterval(animate, phases[0].duration);
+    }
+
+    function resetAnimation() {
+        clearInterval(animationInterval);
+        isExercising = false;
+        startButton.innerHTML = '<i class="fas fa-play me-2"></i>Start Exercise';
+        breathingCircle.style.transform = 'scale(1)';
+        breathingText.textContent = 'Breathe';
+    }
+});
+</script>
+
+<%- include('partials/footer') %> 

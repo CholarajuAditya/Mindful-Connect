@@ -1,0 +1,269 @@
+<%- include('partials/header-logged-in') %>
+
+<!-- Hero Section -->
+<section class="hero">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-lg-10 text-center">
+        <h1 class="display-3">Mood <span class="text-gradient">Tracker</span></h1>
+        <p class="subtitle mb-4">Track your daily mood, activities, and sleep to identify patterns</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Mood Entry Form -->
+<section class="features py-6">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-lg-8">
+        <div class="feature-card">
+          <div class="card-body p-4">
+            <h2 class="h3 mb-4 text-center">How are you feeling today?</h2>
+            <form id="moodForm" class="needs-validation" novalidate>
+              <!-- Mood Selection -->
+              <div class="mb-4">
+                <label class="form-label">Select your mood</label>
+                <div class="d-flex justify-content-between mood-options">
+                  <div class="mood-option" data-mood="Very Happy">
+                    <i class="fas fa-laugh-beam fa-2x"></i>
+                    <span>Very Happy</span>
+                  </div>
+                  <div class="mood-option" data-mood="Happy">
+                    <i class="fas fa-smile fa-2x"></i>
+                    <span>Happy</span>
+                  </div>
+                  <div class="mood-option" data-mood="Neutral">
+                    <i class="fas fa-meh fa-2x"></i>
+                    <span>Neutral</span>
+                  </div>
+                  <div class="mood-option" data-mood="Sad">
+                    <i class="fas fa-frown fa-2x"></i>
+                    <span>Sad</span>
+                  </div>
+                  <div class="mood-option" data-mood="Very Sad">
+                    <i class="fas fa-sad-tear fa-2x"></i>
+                    <span>Very Sad</span>
+                  </div>
+                </div>
+                <input type="hidden" name="mood" id="selectedMood" required>
+              </div>
+
+              <!-- Activities -->
+              <div class="mb-4">
+                <label for="activities" class="form-label">Activities (comma-separated)</label>
+                <input type="text" class="form-control" id="activities" name="activities" 
+                       placeholder="e.g., Exercise, Reading, Socializing">
+              </div>
+
+              <!-- Sleep Hours -->
+              <div class="mb-4">
+                <label for="sleepHours" class="form-label">Hours of Sleep</label>
+                <input type="number" class="form-control" id="sleepHours" name="sleepHours" 
+                       min="0" max="24" step="0.5" placeholder="e.g., 7.5">
+              </div>
+
+              <!-- Triggers -->
+              <div class="mb-4">
+                <label for="triggers" class="form-label">Triggers (comma-separated)</label>
+                <input type="text" class="form-control" id="triggers" name="triggers" 
+                       placeholder="e.g., Work stress, Family issues">
+              </div>
+
+              <!-- Notes -->
+              <div class="mb-4">
+                <label for="notes" class="form-label">Additional Notes</label>
+                <textarea class="form-control" id="notes" name="notes" rows="3" 
+                          placeholder="How are you feeling? What's on your mind?"></textarea>
+              </div>
+
+              <div class="text-center">
+                <button type="submit" class="btn btn-primary">
+                  <i class="fas fa-save me-2"></i>Save Entry
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Mood History -->
+<section class="features py-6">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-lg-10">
+        <div class="feature-card">
+          <div class="card-body p-4">
+            <h2 class="h3 mb-4 text-center">Your Mood History</h2>
+            <div id="moodHistory" class="mood-history">
+              <!-- Mood entries will be loaded here -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Custom CSS -->
+<style>
+.mood-options {
+  gap: 1rem;
+}
+
+.mood-option {
+  text-align: center;
+  cursor: pointer;
+  padding: 1rem;
+  border-radius: 0.5rem;
+  transition: all 0.3s ease;
+}
+
+.mood-option:hover {
+  background-color: var(--bs-primary);
+  color: white;
+}
+
+.mood-option.selected {
+  background-color: var(--bs-primary);
+  color: white;
+}
+
+.mood-option i {
+  display: block;
+  margin-bottom: 0.5rem;
+}
+
+.mood-history {
+  max-height: 400px;
+  overflow-y: auto;
+}
+
+.mood-entry {
+  padding: 1rem;
+  border-bottom: 1px solid var(--bs-border-color);
+}
+
+.mood-entry:last-child {
+  border-bottom: none;
+}
+</style>
+
+<!-- Custom JavaScript -->
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const moodForm = document.getElementById('moodForm');
+    const moodOptions = document.querySelectorAll('.mood-option');
+    const selectedMoodInput = document.getElementById('selectedMood');
+    const moodHistory = document.getElementById('moodHistory');
+
+    // Handle mood selection
+    moodOptions.forEach(option => {
+        option.addEventListener('click', function() {
+            moodOptions.forEach(opt => opt.classList.remove('selected'));
+            this.classList.add('selected');
+            selectedMoodInput.value = this.dataset.mood;
+        });
+    });
+
+    // Handle form submission
+    moodForm.addEventListener('submit', async function(e) {
+        e.preventDefault();
+        
+        if (!selectedMoodInput.value) {
+            alert('Please select your mood');
+            return;
+        }
+
+        const formData = new FormData(moodForm);
+        const data = Object.fromEntries(formData.entries());
+
+        try {
+            const response = await fetch('/mood-tracker/add', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(data)
+            });
+
+            const result = await response.json();
+            
+            if (result.success) {
+                alert('Mood entry saved successfully!');
+                moodForm.reset();
+                moodOptions.forEach(opt => opt.classList.remove('selected'));
+                loadMoodHistory();
+            } else {
+                alert('Error saving mood entry');
+            }
+        } catch (error) {
+            console.error('Error:', error);
+            alert('Error saving mood entry');
+        }
+    });
+
+    // Load mood history
+    async function loadMoodHistory() {
+        try {
+            const response = await fetch('/mood-tracker/history');
+            const data = await response.json();
+            
+            if (data.success) {
+                moodHistory.innerHTML = data.moodEntries.map(entry => `
+                    <div class="mood-entry">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div>
+                                <strong>${new Date(entry.date).toLocaleDateString()}</strong>
+                                <span class="ms-2">
+                                    <i class="fas fa-${getMoodIcon(entry.mood)}"></i>
+                                    ${entry.mood}
+                                </span>
+                            </div>
+                            <div>
+                                <small>Sleep: ${entry.sleepHours} hours</small>
+                            </div>
+                        </div>
+                        ${entry.activities.length ? `
+                            <div class="mt-2">
+                                <small>Activities: ${entry.activities.join(', ')}</small>
+                            </div>
+                        ` : ''}
+                        ${entry.triggers.length ? `
+                            <div class="mt-2">
+                                <small>Triggers: ${entry.triggers.join(', ')}</small>
+                            </div>
+                        ` : ''}
+                        ${entry.notes ? `
+                            <div class="mt-2">
+                                <small>Notes: ${entry.notes}</small>
+                            </div>
+                        ` : ''}
+                    </div>
+                `).join('');
+            }
+        } catch (error) {
+            console.error('Error loading mood history:', error);
+        }
+    }
+
+    function getMoodIcon(mood) {
+        const icons = {
+            'Very Happy': 'laugh-beam',
+            'Happy': 'smile',
+            'Neutral': 'meh',
+            'Sad': 'frown',
+            'Very Sad': 'sad-tear'
+        };
+        return icons[mood] || 'meh';
+    }
+
+    // Load initial mood history
+    loadMoodHistory();
+});
+</script>
+
+<%- include('partials/footer') %> 

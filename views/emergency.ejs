@@ -1,0 +1,161 @@
+<%- include('partials/header-logged-in') %>
+
+<!-- Hero Section -->
+<section class="hero">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-lg-10 text-center">
+        <h1 class="display-3">Emergency <span class="text-gradient">Support</span></h1>
+        <p class="subtitle mb-4">Immediate help is available 24/7</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Emergency Contacts -->
+<section class="features py-6">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-lg-8">
+        <!-- Crisis Hotline -->
+        <div class="emergency-card mb-4">
+          <div class="card-body">
+            <h3><i class="fas fa-phone-alt me-2"></i>National Crisis Hotline</h3>
+            <p>Available 24/7 for immediate support and crisis intervention</p>
+            <a href="tel:988" class="btn btn-primary">
+              <i class="fas fa-phone"></i>Call 988
+            </a>
+          </div>
+        </div>
+
+        <!-- Emergency Services -->
+        <div class="emergency-card mb-4">
+          <div class="card-body">
+            <h3><i class="fas fa-ambulance me-2"></i>Emergency Services</h3>
+            <p>For life-threatening emergencies, call emergency services immediately</p>
+            <a href="tel:911" class="btn btn-danger">
+              <i class="fas fa-phone"></i>Call 911
+            </a>
+          </div>
+        </div>
+
+        <!-- Crisis Text Line -->
+        <div class="emergency-card mb-4">
+          <div class="card-body">
+            <h3><i class="fas fa-comment-alt me-2"></i>Crisis Text Line</h3>
+            <p>Text HOME to 741741 to connect with a Crisis Counselor</p>
+            <a href="sms:741741&body=HOME" class="btn btn-primary">
+              <i class="fas fa-comment"></i>Text HOME to 741741
+            </a>
+          </div>
+        </div>
+
+        <!-- Local Resources -->
+        <div class="emergency-card">
+          <div class="card-body">
+            <h3><i class="fas fa-hospital me-2"></i>Local Resources</h3>
+            <p>Find mental health professionals and crisis centers in your area</p>
+            <a href="https://www.samhsa.gov/find-help/national-helpline" target="_blank" class="btn btn-primary">
+              <i class="fas fa-search"></i>Find Local Help
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Back to Top Button -->
+<button id="backToTop" aria-label="Back to top">
+  <i class="fas fa-arrow-up"></i>
+</button>
+
+<%- include('partials/footer') %>
+
+<style>
+.emergency-card {
+  background-color: var(--bs-dark);
+  border: none;
+  border-radius: 1rem;
+  transition: all 0.3s ease;
+}
+
+.emergency-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+}
+
+.emergency-card .card-body {
+  padding: 2rem;
+}
+
+.emergency-card h3 {
+  color: var(--bs-primary);
+  margin-bottom: 1rem;
+}
+
+.emergency-card p {
+  color: var(--bs-light);
+  opacity: 0.8;
+}
+
+.emergency-card .btn {
+  padding: 0.5rem 1.5rem;
+  font-weight: 500;
+}
+
+.emergency-card .btn i {
+  margin-right: 0.5rem;
+}
+
+#backToTop {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  width: 40px;
+  height: 40px;
+  background-color: var(--bs-primary);
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  opacity: 0;
+  transition: all 0.3s ease;
+  z-index: 1000;
+  border: none;
+  padding: 0;
+  font-size: 1.2rem;
+}
+
+#backToTop.visible {
+  opacity: 1;
+}
+
+#backToTop:hover {
+  background-color: var(--bs-primary-dark);
+  transform: translateY(-3px);
+}
+</style>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  const backToTop = document.getElementById('backToTop');
+  
+  window.addEventListener('scroll', () => {
+    if (window.pageYOffset > 300) {
+      backToTop.classList.add('visible');
+    } else {
+      backToTop.classList.remove('visible');
+    }
+  });
+  
+  backToTop.addEventListener('click', () => {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    });
+  });
+});
+</script> 

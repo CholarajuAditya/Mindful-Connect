@@ -30,7 +30,8 @@ router.post("/login", async (req, res) => {
 
         // Set user session
         req.session.userId = user._id;
-        res.redirect("/chat");
+        req.session.user = user;
+        res.redirect("/dashboard");
     } catch (error) {
         console.error("Login error:", error);
         res.render("auth/login", {
@@ -74,7 +75,8 @@ router.post("/register", async (req, res) => {
 
         // Set user session
         req.session.userId = user._id;
-        res.redirect("/chat");
+        req.session.user = user;
+        res.redirect("/dashboard");
     } catch (error) {
         console.error("Registration error:", error);
         res.render("auth/register", {
@@ -86,6 +88,15 @@ router.post("/register", async (req, res) => {
 router.get("/logout", (req, res) => {
     req.session.destroy();
     res.redirect("/");
+});
+
+// Dashboard route
+router.get('/dashboard', (req, res) => {
+    // Check if user is logged in
+    if (!req.session.user) {
+        return res.redirect('/auth/login');
+    }
+    res.render('dashboard');
 });
 
 export default router;

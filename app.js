@@ -7,6 +7,10 @@ import dotenv from "dotenv";
 import chatRoutes from "./routes/chat.js";
 import authRoutes from "./routes/auth.js";
 import developersRoutes from "./routes/developers.js";
+import resourcesRoutes from "./routes/resources.js";
+import moodRoutes from "./routes/mood.js";
+import breathingRoutes from "./routes/breathing.js";
+import emergencyRoutes from "./routes/emergency.js";
 
 // Configure dotenv
 dotenv.config();
@@ -19,6 +23,7 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 // Middleware
+app.use(express.json()); // Add JSON middleware
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, "public")));
 app.use(
@@ -38,6 +43,19 @@ app.set("views", path.join(__dirname, "views"));
 app.use("/", chatRoutes);
 app.use("/auth", authRoutes);
 app.use("/developers", developersRoutes);
+app.use("/resources", resourcesRoutes);
+app.use("/mood-tracker", moodRoutes);
+app.use("/breathing", breathingRoutes);
+app.use("/emergency", emergencyRoutes);
+
+// Dashboard route
+app.get("/dashboard", (req, res) => {
+    // Check if user is logged in
+    if (!req.session.user) {
+        return res.redirect('/auth/login');
+    }
+    res.render('dashboard');
+});
 
 console.log(
     "API Key:",

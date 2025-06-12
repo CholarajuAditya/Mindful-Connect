@@ -1,4 +1,4 @@
-<%- include('partials/header') %>
+<%- include('partials/header-logged-in') %>
 
 <!-- Hero Section -->
 <section class="hero">
@@ -6,7 +6,12 @@
     <div class="row justify-content-center">
       <div class="col-lg-8 text-center">
         <h1 class="display-3">Welcome to <span class="text-gradient">MindfulConnect</span></h1>
-        <p class="subtitle mb-4">Your journey to mental wellness starts here</p>
+        <p class="subtitle mb-4">Your personalized mental wellness journey</p>
+        <div class="d-flex justify-content-center gap-3">
+          <a href="/chat" class="btn btn-primary btn-lg px-4">
+            <i class="fas fa-comments me-2"></i>Start Chat
+          </a>
+        </div>
       </div>
     </div>
   </div>
@@ -16,8 +21,8 @@
 <section class="features py-6">
   <div class="container">
     <div class="section-heading mb-6 text-center">
-      <h2>Our Services</h2>
-      <p class="section-subtitle">Comprehensive mental health support at your fingertips</p>
+      <h2>Your Support Options</h2>
+      <p class="section-subtitle">Choose the support that best fits your needs</p>
     </div>
     <div class="row g-4">
       <!-- Feature 1 -->
@@ -29,6 +34,9 @@
             </div>
             <h3 class="feature-title">AI Chat Support</h3>
             <p class="feature-text">Get immediate support and guidance through our AI-powered chat system, available 24/7.</p>
+            <a href="/chat" class="btn btn-primary mt-3">
+              <i class="fas fa-comments me-2"></i>Start Chat
+            </a>
           </div>
         </div>
       </div>
@@ -42,6 +50,9 @@
             </div>
             <h3 class="feature-title">Professional Support</h3>
             <p class="feature-text">Connect with qualified mental health professionals for personalized guidance and support.</p>
+            <a href="/therapist" class="btn btn-primary mt-3">
+              <i class="fas fa-user-md me-2"></i>Find Therapist
+            </a>
           </div>
         </div>
       </div>
@@ -55,6 +66,9 @@
             </div>
             <h3 class="feature-title">Community Support</h3>
             <p class="feature-text">Join a supportive community of individuals on similar mental health journeys.</p>
+            <a href="/community" class="btn btn-primary mt-3">
+              <i class="fas fa-users me-2"></i>Join Community
+            </a>
           </div>
         </div>
       </div>
@@ -62,25 +76,4 @@
   </div>
 </section>
 
-<!-- Demo Section -->
-<section class="demo py-5 bg-dark-2">
-  <div class="container text-center">
-    <h2 class="mb-4">Experience Compassionate AI</h2>
-    <p class="demo-subtitle mb-4">Start a conversation with our supportive AI companion</p>
-    <a href="/chat" class="btn btn-primary btn-lg px-4">Start Chatting</a>
-  </div>
-</section>
-
-<!-- Call to Action -->
-<section class="cta py-6">
-  <div class="container text-center">
-    <h2 class="mb-4">Ready to Start Your Journey?</h2>
-    <p class="cta-subtitle mb-4">Join our community and take the first step towards better mental health.</p>
-    <div class="d-flex justify-content-center flex-wrap gap-3">
-      <a href="/auth/register" class="btn btn-primary btn-lg px-4">Sign Up Now</a>
-      <a href="/dashboard" class="btn btn-dashboard-outline btn-lg px-4">Go to Dashboard</a>
-    </div>
-  </div>
-</section>
-
-<%- include('partials/footer') %>
+<%- include('partials/footer') %> 

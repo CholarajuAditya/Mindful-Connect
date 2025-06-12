@@ -1,0 +1,204 @@
+<%- include('partials/header-logged-in') %>
+
+<!-- Hero Section -->
+<section class="hero">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-lg-10 text-center">
+        <h1 class="display-3">Emergency <span class="text-gradient">Support</span></h1>
+        <p class="subtitle mb-4">Immediate help is available. You are not alone.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Emergency Contacts -->
+<section class="features py-6">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-lg-8">
+        <!-- Mental Health Helplines -->
+        <div class="feature-card mb-4">
+          <div class="card-body p-4">
+            <h2 class="h3 mb-4 text-center">
+              <i class="fas fa-brain me-2"></i>Mental Health Helplines
+            </h2>
+            <div class="helpline-list">
+              <div class="helpline-item">
+                <h3 class="h5">Vandrevala Foundation</h3>
+                <p class="mb-2">24/7 Mental Health Support</p>
+                <a href="tel:9999666555" class="btn btn-primary">
+                  <i class="fas fa-phone me-2"></i>9999 666 555
+                </a>
+              </div>
+              <div class="helpline-item">
+                <h3 class="h5">The Live Love Laugh Foundation</h3>
+                <p class="mb-2">Mental Health Support</p>
+                <a href="tel:08047092333" class="btn btn-primary">
+                  <i class="fas fa-phone me-2"></i>080-4709 2333
+                </a>
+              </div>
+              <div class="helpline-item">
+                <h3 class="h5">iCall</h3>
+                <p class="mb-2">Psychosocial Helpline</p>
+                <a href="tel:02225521111" class="btn btn-primary">
+                  <i class="fas fa-phone me-2"></i>022-2552 1111
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Emergency Services -->
+        <div class="feature-card mb-4">
+          <div class="card-body p-4">
+            <h2 class="h3 mb-4 text-center">
+              <i class="fas fa-ambulance me-2"></i>Emergency Services
+            </h2>
+            <div class="helpline-list">
+              <div class="helpline-item">
+                <h3 class="h5">National Emergency Number</h3>
+                <p class="mb-2">Police, Fire, Ambulance</p>
+                <a href="tel:112" class="btn btn-danger">
+                  <i class="fas fa-phone me-2"></i>112
+                </a>
+              </div>
+              <div class="helpline-item">
+                <h3 class="h5">Police Control Room</h3>
+                <p class="mb-2">24/7 Emergency Response</p>
+                <a href="tel:100" class="btn btn-danger">
+                  <i class="fas fa-phone me-2"></i>100
+                </a>
+              </div>
+              <div class="helpline-item">
+                <h3 class="h5">Ambulance Services</h3>
+                <p class="mb-2">Medical Emergency</p>
+                <a href="tel:102" class="btn btn-danger">
+                  <i class="fas fa-phone me-2"></i>102
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Women's Safety -->
+        <div class="feature-card mb-4">
+          <div class="card-body p-4">
+            <h2 class="h3 mb-4 text-center">
+              <i class="fas fa-shield-alt me-2"></i>Women's Safety
+            </h2>
+            <div class="helpline-list">
+              <div class="helpline-item">
+                <h3 class="h5">Women's Helpline</h3>
+                <p class="mb-2">24/7 Support for Women</p>
+                <a href="tel:1091" class="btn btn-warning">
+                  <i class="fas fa-phone me-2"></i>1091
+                </a>
+              </div>
+              <div class="helpline-item">
+                <h3 class="h5">National Commission for Women</h3>
+                <p class="mb-2">Women's Rights & Safety</p>
+                <a href="tel:7827170170" class="btn btn-warning">
+                  <i class="fas fa-phone me-2"></i>7827 170 170
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Additional Support -->
+        <div class="feature-card">
+          <div class="card-body p-4">
+            <h2 class="h3 mb-4 text-center">
+              <i class="fas fa-hands-helping me-2"></i>Additional Support
+            </h2>
+            <div class="helpline-list">
+              <div class="helpline-item">
+                <h3 class="h5">Child Helpline</h3>
+                <p class="mb-2">24/7 Support for Children</p>
+                <a href="tel:1098" class="btn btn-info">
+                  <i class="fas fa-phone me-2"></i>1098
+                </a>
+              </div>
+              <div class="helpline-item">
+                <h3 class="h5">Senior Citizen Helpline</h3>
+                <p class="mb-2">Support for Elderly</p>
+                <a href="tel:14567" class="btn btn-info">
+                  <i class="fas fa-phone me-2"></i>14567
+                </a>
+              </div>
+              <div class="helpline-item">
+                <h3 class="h5">Disaster Management</h3>
+                <p class="mb-2">National Disaster Management</p>
+                <a href="tel:1078" class="btn btn-info">
+                  <i class="fas fa-phone me-2"></i>1078
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+.helpline-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.helpline-item {
+  padding: 1.5rem;
+  border-radius: 0.5rem;
+  background-color: var(--bs-dark);
+  transition: all 0.3s ease;
+}
+
+.helpline-item:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+}
+
+.helpline-item h3 {
+  color: var(--bs-primary);
+  margin-bottom: 0.5rem;
+}
+
+.helpline-item p {
+  color: var(--bs-light);
+  opacity: 0.8;
+}
+
+.btn {
+  width: 100%;
+  padding: 0.75rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.btn i {
+  font-size: 1.1rem;
+}
+
+.btn-danger {
+  background-color: #dc3545;
+  border-color: #dc3545;
+}
+
+.btn-warning {
+  background-color: #ffc107;
+  border-color: #ffc107;
+  color: #000;
+}
+
+.btn-info {
+  background-color: #0dcaf0;
+  border-color: #0dcaf0;
+  color: #000;
+}
+</style>
+
+<%- include('partials/footer') %> 

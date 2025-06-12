@@ -1,0 +1,339 @@
+<%- include('partials/header-logged-in') %>
+
+<!-- Hero Section -->
+<section class="hero">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-lg-10 text-center">
+        <h1 class="display-3">Mental Health <span class="text-gradient">Resources</span></h1>
+        <p class="subtitle mb-4">Tools, guides, and support to help you on your journey</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Quick Tools Section -->
+<section class="features py-6">
+  <div class="container">
+    <div class="section-heading mb-6 text-center">
+      <h2>Quick Tools</h2>
+      <p class="section-subtitle">Immediate support and self-help resources</p>
+    </div>
+    <div class="row g-4">
+      <!-- Mood Tracker -->
+      <div class="col-md-6 col-lg-4">
+        <div class="feature-card fade-in h-100">
+          <div class="card-body p-4 text-center">
+            <div class="icon-wrapper mb-4 d-flex justify-content-center">
+              <i class="fas fa-chart-line fa-2x text-gradient" aria-hidden="true"></i>
+            </div>
+            <h3 class="feature-title">Mood Tracker</h3>
+            <p class="feature-text">Track your daily mood, sleep, and activities to identify patterns and triggers.</p>
+            <a href="/mood-tracker" class="btn btn-primary mt-3">
+              <i class="fas fa-plus me-2"></i>Start Tracking
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Breathing Exercises -->
+      <div class="col-md-6 col-lg-4">
+        <div class="feature-card fade-in h-100" style="animation-delay: 0.2s;">
+          <div class="card-body p-4 text-center">
+            <div class="icon-wrapper mb-4 d-flex justify-content-center">
+              <i class="fas fa-wind fa-2x text-gradient" aria-hidden="true"></i>
+            </div>
+            <h3 class="feature-title">Breathing Exercises</h3>
+            <p class="feature-text">Guided breathing exercises to help manage anxiety and stress in the moment.</p>
+            <a href="/breathing" class="btn btn-primary mt-3">
+              <i class="fas fa-play me-2"></i>Start Exercise
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Emergency Resources -->
+      <div class="col-md-6 col-lg-4">
+        <div class="feature-card fade-in h-100" style="animation-delay: 0.4s;">
+          <div class="card-body p-4 text-center">
+            <div class="icon-wrapper mb-4 d-flex justify-content-center">
+              <i class="fas fa-phone-alt fa-2x text-gradient" aria-hidden="true"></i>
+            </div>
+            <h3 class="feature-title">Emergency Support</h3>
+            <p class="feature-text">Immediate access to crisis hotlines and emergency mental health services.</p>
+            <a href="/emergency" class="btn btn-primary mt-3">
+              <i class="fas fa-exclamation-circle me-2"></i>Get Help Now
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Educational Resources -->
+<section class="features py-6">
+  <div class="container">
+    <div class="section-heading mb-6 text-center">
+      <h2>Learn & Understand</h2>
+      <p class="section-subtitle">Educational resources to help you understand mental health</p>
+    </div>
+    <div class="row g-4">
+      <!-- Articles -->
+      <div class="col-md-6">
+        <div class="feature-card h-100">
+          <div class="card-body p-4">
+            <h3 class="h4 mb-4">
+              <i class="fas fa-book-open text-gradient me-2"></i>
+              Articles & Guides
+            </h3>
+            <ul class="list-unstyled">
+              <li class="mb-3">
+                <a href="/articles/anxiety" class="text-decoration-none">
+                  <i class="fas fa-chevron-right me-2 text-primary"></i>
+                  Understanding Anxiety: A Comprehensive Guide
+                </a>
+              </li>
+              <li class="mb-3">
+                <a href="/articles/depression" class="text-decoration-none">
+                  <i class="fas fa-chevron-right me-2 text-primary"></i>
+                  Depression: Signs, Symptoms, and Coping Strategies
+                </a>
+              </li>
+              <li class="mb-3">
+                <a href="/articles/stress" class="text-decoration-none">
+                  <i class="fas fa-chevron-right me-2 text-primary"></i>
+                  Managing Stress in Daily Life
+                </a>
+              </li>
+              <li>
+                <a href="/articles/mindfulness" class="text-decoration-none">
+                  <i class="fas fa-chevron-right me-2 text-primary"></i>
+                  Introduction to Mindfulness Practice
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- Videos -->
+      <div class="col-md-6">
+        <div class="feature-card h-100">
+          <div class="card-body p-4">
+            <h3 class="h4 mb-4">
+              <i class="fas fa-video text-gradient me-2"></i>
+              Video Resources
+            </h3>
+            <ul class="list-unstyled">
+              <li class="mb-3">
+                <a href="/videos/meditation" class="text-decoration-none">
+                  <i class="fas fa-chevron-right me-2 text-primary"></i>
+                  Guided Meditation Sessions
+                </a>
+              </li>
+              <li class="mb-3">
+                <a href="/videos/therapy" class="text-decoration-none">
+                  <i class="fas fa-chevron-right me-2 text-primary"></i>
+                  Understanding Therapy: What to Expect
+                </a>
+              </li>
+              <li class="mb-3">
+                <a href="/videos/coping" class="text-decoration-none">
+                  <i class="fas fa-chevron-right me-2 text-primary"></i>
+                  Coping Skills Workshop
+                </a>
+              </li>
+              <li>
+                <a href="/videos/success" class="text-decoration-none">
+                  <i class="fas fa-chevron-right me-2 text-primary"></i>
+                  Recovery Success Stories
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Self-Help Tools -->
+<section class="features py-6">
+  <div class="container">
+    <div class="section-heading mb-6 text-center">
+      <h2>Self-Help Tools</h2>
+      <p class="section-subtitle">Interactive tools to support your mental health journey</p>
+    </div>
+    <div class="row g-4">
+      <!-- Journal -->
+      <div class="col-md-6 col-lg-3">
+        <div class="feature-card fade-in h-100">
+          <div class="card-body p-4 text-center">
+            <div class="icon-wrapper mb-4 d-flex justify-content-center">
+              <i class="fas fa-book fa-2x text-gradient" aria-hidden="true"></i>
+            </div>
+            <h3 class="feature-title">Digital Journal</h3>
+            <p class="feature-text">Express your thoughts and track your progress with our guided journaling tool.</p>
+            <a href="/journal" class="btn btn-primary mt-3">
+              <i class="fas fa-pen me-2"></i>Start Journaling
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Meditation -->
+      <div class="col-md-6 col-lg-3">
+        <div class="feature-card fade-in h-100" style="animation-delay: 0.2s;">
+          <div class="card-body p-4 text-center">
+            <div class="icon-wrapper mb-4 d-flex justify-content-center">
+              <i class="fas fa-spa fa-2x text-gradient" aria-hidden="true"></i>
+            </div>
+            <h3 class="feature-title">Meditation Timer</h3>
+            <p class="feature-text">Customizable meditation sessions with ambient sounds and gentle reminders.</p>
+            <a href="/meditation" class="btn btn-primary mt-3">
+              <i class="fas fa-play me-2"></i>Start Meditation
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Goals -->
+      <div class="col-md-6 col-lg-3">
+        <div class="feature-card fade-in h-100" style="animation-delay: 0.4s;">
+          <div class="card-body p-4 text-center">
+            <div class="icon-wrapper mb-4 d-flex justify-content-center">
+              <i class="fas fa-bullseye fa-2x text-gradient" aria-hidden="true"></i>
+            </div>
+            <h3 class="feature-title">Goal Tracker</h3>
+            <p class="feature-text">Set and track your mental health goals with our supportive goal-setting tool.</p>
+            <a href="/goals" class="btn btn-primary mt-3">
+              <i class="fas fa-plus me-2"></i>Set Goals
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Community -->
+      <div class="col-md-6 col-lg-3">
+        <div class="feature-card fade-in h-100" style="animation-delay: 0.6s;">
+          <div class="card-body p-4 text-center">
+            <div class="icon-wrapper mb-4 d-flex justify-content-center">
+              <i class="fas fa-users fa-2x text-gradient" aria-hidden="true"></i>
+            </div>
+            <h3 class="feature-title">Support Groups</h3>
+            <p class="feature-text">Connect with others in similar situations through our moderated support groups.</p>
+            <a href="/groups" class="btn btn-primary mt-3">
+              <i class="fas fa-user-plus me-2"></i>Join Group
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Professional Resources -->
+<section class="features py-6">
+  <div class="container">
+    <div class="section-heading mb-6 text-center">
+      <h2>Professional Support</h2>
+      <p class="section-subtitle">Resources to help you find and work with mental health professionals</p>
+    </div>
+    <div class="row g-4">
+      <!-- Find Therapist -->
+      <div class="col-md-6">
+        <div class="feature-card h-100">
+          <div class="card-body p-4">
+            <h3 class="h4 mb-4">
+              <i class="fas fa-user-md text-gradient me-2"></i>
+              Find a Therapist
+            </h3>
+            <p class="mb-4">Connect with qualified mental health professionals in your area or online.</p>
+            <a href="/therapist" class="btn btn-primary">
+              <i class="fas fa-search me-2"></i>Search Therapists
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Therapy Guide -->
+      <div class="col-md-6">
+        <div class="feature-card h-100">
+          <div class="card-body p-4">
+            <h3 class="h4 mb-4">
+              <i class="fas fa-info-circle text-gradient me-2"></i>
+              Therapy Guide
+            </h3>
+            <p class="mb-4">Learn about different types of therapy and what to expect from your sessions.</p>
+            <a href="/therapy-guide" class="btn btn-primary">
+              <i class="fas fa-book me-2"></i>Read Guide
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<%- include('partials/footer') %>
+
+<style>
+.tool-card {
+  padding: 2rem;
+  border-radius: 0.5rem;
+  background-color: var(--bs-dark);
+  color: var(--bs-light);
+  text-align: center;
+  transition: all 0.3s ease;
+  height: 100%;
+}
+
+.tool-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+}
+
+.tool-card i {
+  color: var(--bs-primary);
+}
+
+.emergency-tool {
+  background-color: var(--bs-danger);
+  color: white;
+}
+
+.emergency-tool:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 5px 15px rgba(220, 53, 69, 0.3);
+}
+
+.resource-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.resource-item {
+  padding: 1.5rem;
+  border-radius: 0.5rem;
+  background-color: var(--bs-dark);
+  transition: all 0.3s ease;
+}
+
+.resource-item:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+}
+
+.resource-item h3 {
+  color: var(--bs-primary);
+  margin-bottom: 0.5rem;
+}
+
+.resource-item p {
+  color: var(--bs-light);
+  opacity: 0.8;
+  margin-bottom: 1rem;
+}
+</style> 
