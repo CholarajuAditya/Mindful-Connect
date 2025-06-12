@@ -336,4 +336,125 @@
   opacity: 0.8;
   margin-bottom: 1rem;
 }
+
+/* ====== Enhanced Button Styles ====== */
+/* Base Button */
+.btn {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.5rem;
+  font-size: 1rem;
+  font-weight: 600;
+  line-height: 1.5;
+  border-radius: 0.5rem;
+  transition: all 0.2s ease-in-out;
+  cursor: pointer;
+  text-align: center;
+  text-decoration: none;
+  white-space: nowrap;
+  vertical-align: middle;
+  user-select: none;
+  border: none;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+}
+
+/* Button Sizes */
+.btn-sm {
+  padding: 0.5rem 1rem;
+  font-size: 0.875rem;
+}
+
+.btn-lg {
+  padding: 1rem 2rem;
+  font-size: 1.1rem;
+}
+
+/* Button Types */
+.btn-primary {
+  background-color: #0d6efd; /* bs-primary */
+  color: white;
+}
+
+.btn-primary:hover,
+.btn-primary:focus {
+  background-color: #0b5ed7; /* bs-primary-dark */
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.btn-secondary {
+  background-color: transparent;
+  color: #0d6efd; /* bs-primary */
+  border: 2px solid #0d6efd; /* bs-primary */
+}
+
+.btn-secondary:hover,
+.btn-secondary:focus {
+  background-color: rgba(13, 110, 253, 0.1); /* bs-primary with opacity */
+}
+
+/* Icon Styling */
+.btn i {
+  font-size: 1.1em;
+  transition: transform 0.2s ease-in-out;
+}
+
+.btn:hover i {
+  transform: translateX(2px);
+}
+
+/* Dark Mode Adaptations */
+.dark-mode .btn-primary {
+  background-color: #0b5ed7; /* Slightly darker in dark mode */
+}
+
+.dark-mode .btn-secondary {
+  color: #6ea8fe; /* Lighter blue in dark mode */
+  border-color: #6ea8fe;
+}
+
+.dark-mode .btn-secondary:hover {
+  background-color: rgba(110, 168, 254, 0.2); /* Lighter hover in dark mode */
+}
+
+/* Focus State */
+.btn:focus {
+  outline: none;
+  box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
+}
+
+/* Disabled State */
+.btn:disabled {
+  opacity: 0.65;
+  cursor: not-allowed;
+  transform: none !important;
+  box-shadow: none !important;
+}
+
+/* Special Emergency Button */
+.btn-emergency {
+  background-color: #dc3545; /* bs-danger */
+  animation: pulse 2s infinite;
+}
+
+.btn-emergency:hover {
+  background-color: #bb2d3b; /* bs-danger-dark */
+}
+
+@keyframes pulse {
+  0% { box-shadow: 0 0 0 0 rgba(220, 53, 69, 0.7); }
+  70% { box-shadow: 0 0 0 10px rgba(220, 53, 69, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(220, 53, 69, 0); }
+}
+
+/* Card Button Adjustments */
+.feature-card .btn {
+  width: 100%;
+  max-width: 240px;
+  margin: 0 auto;
+}
 </style> 
