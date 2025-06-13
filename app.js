@@ -11,6 +11,7 @@ import resourcesRoutes from "./routes/resources.js";
 import moodRoutes from "./routes/mood.js";
 import breathingRoutes from "./routes/breathing.js";
 import emergencyRoutes from "./routes/emergency.js";
+import communityRoutes from "./routes/community.js";
 
 // Configure dotenv
 dotenv.config();
@@ -47,14 +48,15 @@ app.use("/resources", resourcesRoutes);
 app.use("/mood-tracker", moodRoutes);
 app.use("/breathing", breathingRoutes);
 app.use("/emergency", emergencyRoutes);
+app.use("/community", communityRoutes);
 
 // Dashboard route
 app.get("/dashboard", (req, res) => {
     // Check if user is logged in
     if (!req.session.user) {
-        return res.redirect('/auth/login');
+        return res.redirect("/auth/login");
     }
-    res.render('dashboard');
+    res.render("dashboard");
 });
 
 console.log(

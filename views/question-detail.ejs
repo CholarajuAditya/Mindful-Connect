@@ -1,0 +1,155 @@
+<%- include('partials/header') %>
+
+<div class="container py-5">
+    <div class="row">
+        <div class="col-lg-8 mx-auto">
+            <!-- Question Section -->
+            <div class="card mb-4">
+                <div class="card-body">
+                    <h1 class="mb-3"><%= post.title %></h1>
+                    <div class="d-flex align-items-center mb-4">
+                        <div class="me-3">
+                            <% if (!post.isAnonymous && post.author.avatar) { %>
+                            <img
+                                src="<%= post.author.avatar %>"
+                                class="rounded-circle"
+                                width="40"
+                                height="40"
+                                alt="User avatar"
+                            />
+                            <% } else { %>
+                            <div
+                                class="rounded-circle bg-secondary d-flex align-items-center justify-content-center"
+                                style="width: 40px; height: 40px;"
+                            >
+                                <i class="fas fa-user text-white"></i>
+                            </div>
+                            <% } %>
+                        </div>
+                        <div>
+                            <p class="mb-0">
+                                <%= post.isAnonymous ? 'Anonymous' :
+                                post.author.name %>
+                            </p>
+                            <small class="text-muted"
+                                ><%= new
+                                Date(post.createdAt).toLocaleDateString()
+                                %></small
+                            >
+                        </div>
+                    </div>
+                    <p class="card-text"><%= post.content %></p>
+                    <% if (post.tags && post.tags.length > 0) { %>
+                    <div class="mt-3">
+                        <% post.tags.forEach(tag => { %>
+                        <span class="badge bg-light text-dark me-1"
+                            ><%= tag %></span
+                        >
+                        <% }); %>
+                    </div>
+                    <% } %>
+                </div>
+            </div>
+
+            <!-- Answers Section -->
+            <h3 class="mb-4">Answers</h3>
+
+            <% if (post.answers && post.answers.length > 0) { %> <%
+            post.answers.forEach(answer => { %>
+            <div
+                class="card mb-3 <%= answer.isSolution ? 'border-success' : '' %>"
+            >
+                <div class="card-body">
+                    <% if (answer.isSolution) { %>
+                    <div class="d-flex align-items-center mb-2 text-success">
+                        <i class="fas fa-check-circle me-2"></i>
+                        <small>Marked as solution</small>
+                    </div>
+                    <% } %>
+                    <div class="d-flex align-items-center mb-3">
+                        <div class="me-3">
+                            <% if (answer.author.avatar) { %>
+                            <img
+                                src="<%= answer.author.avatar %>"
+                                class="rounded-circle"
+                                width="40"
+                                height="40"
+                                alt="User avatar"
+                            />
+                            <% } else { %>
+                            <div
+                                class="rounded-circle bg-secondary d-flex align-items-center justify-content-center"
+                                style="width: 40px; height: 40px;"
+                            >
+                                <i class="fas fa-user text-white"></i>
+                            </div>
+                            <% } %>
+                        </div>
+                        <div>
+                            <p class="mb-0"><%= answer.author.name %></p>
+                            <small class="text-muted"
+                                ><%= new
+                                Date(answer.createdAt).toLocaleDateString()
+                                %></small
+                            >
+                        </div>
+                    </div>
+                    <p class="card-text"><%= answer.content %></p>
+
+                    <% if (post.author._id.toString() === user._id.toString() &&
+                    !answer.isSolution) { %>
+                    <div class="mt-3 text-end">
+                        <form
+                            action="/community/answers/<%= answer._id %>/solution"
+                            method="POST"
+                        >
+                            <button
+                                type="submit"
+                                class="btn btn-sm btn-outline-success"
+                            >
+                                Mark as Solution
+                            </button>
+                        </form>
+                    </div>
+                    <% } %>
+                </div>
+            </div>
+            <% }); %> <% } else { %>
+            <div class="alert alert-info">No answers yet</div>
+            <% } %>
+
+            <!-- Inside question-detail.ejs, modify the answer form section -->
+            <% if (user._id.toString() !== post.author._id.toString()) { %>
+            <!-- Answer Form -->
+            <div class="card mt-4">
+                <div class="card-body">
+                    <h4 class="mb-3">Post Your Answer</h4>
+                    <form
+                        action="/community/<%= post._id %>/answers"
+                        method="POST"
+                    >
+                        <div class="mb-3">
+                            <textarea
+                                class="form-control"
+                                name="content"
+                                rows="5"
+                                required
+                            ></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary">
+                            Post Answer
+                        </button>
+                    </form>
+                </div>
+            </div>
+            <% } else { %>
+            <div class="alert alert-info mt-4">
+                <i class="fas fa-info-circle me-2"></i>You can't answer your own
+                question, but others in the community will help.
+            </div>
+            <% } %>
+        </div>
+    </div>
+</div>
+
+<%- include('partials/footer') %>
