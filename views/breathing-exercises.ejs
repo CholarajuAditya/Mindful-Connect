@@ -123,6 +123,35 @@
 </section>
 
 <style>
+:root {
+  --bs-body-bg: #f9fafb;
+  --bs-body-color: #111827;
+  --bs-card-bg: #ffffff;
+  --bs-border-color: #e5e7eb;
+  --bs-primary: #8b5cf6;
+  --bs-primary-dark: #7c3aed;
+  --bs-secondary: #6b7280;
+  --bs-light: #ffffff;
+  --bs-dark: #1f2937;
+}
+
+[data-theme="dark"] {
+  --bs-body-bg: #0f0f13;
+  --bs-body-color: #f3f4f6;
+  --bs-card-bg: #18181b;
+  --bs-border-color: rgba(255, 255, 255, 0.08);
+  --bs-dark: #374151;
+}
+
+.feature-card {
+  background-color: var(--bs-card-bg);
+  border: 1px solid var(--bs-border-color);
+  border-radius: 1rem;
+  transition: all 0.3s ease;
+  color: var(--bs-body-color);
+  margin-bottom: 2rem;
+}
+
 .exercise-option {
   text-align: center;
   padding: 1.5rem;
@@ -131,6 +160,7 @@
   transition: all 0.3s ease;
   background-color: var(--bs-dark);
   color: var(--bs-light);
+  border: 1px solid var(--bs-border-color);
 }
 
 .exercise-option:hover {
@@ -140,6 +170,11 @@
 
 .exercise-option.selected {
   background-color: var(--bs-primary);
+}
+
+.exercise-option h3,
+.exercise-option p {
+  color: var(--bs-light);
 }
 
 .breathing-container {
@@ -170,6 +205,8 @@
   padding: 1rem;
   border-radius: 0.5rem;
   background-color: var(--bs-dark);
+  color: var(--bs-light);
+  border: 1px solid var(--bs-border-color);
 }
 
 .exercise-instructions ol {
@@ -179,6 +216,17 @@
 
 .exercise-instructions li {
   margin-bottom: 0.5rem;
+  color: var(--bs-light);
+}
+
+.text-muted {
+  color: var(--bs-body-color);
+  opacity: 0.7;
+}
+
+.subtitle {
+  color: var(--bs-body-color);
+  opacity: 0.8;
 }
 </style>
 
@@ -306,4 +354,4 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 </script>
 
-<%- include('partials/footer') %> 
+<%- include('partials/footer') %>

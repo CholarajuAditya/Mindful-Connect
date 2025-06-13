@@ -5,6 +5,23 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>MindfulConnect</title>
         <style>
+            :root {
+  --bs-body-bg: #f9fafb; /* Light mode background */
+  --bs-body-color: #111827; /* Light mode text color */
+  --bs-card-bg: #ffffff; /* Light mode card background */
+  --bs-border-color: #e5e7eb; /* Light mode border color */
+  --bs-primary: #8b5cf6; /* Primary color */
+  --bs-primary-dark: #7c3aed; /* Darker primary */
+  --bs-light: #ffffff; /* Light text color */
+}
+
+[data-theme="dark"] {
+  --bs-body-bg: #0f0f13; /* Dark mode background */
+  --bs-body-color: #f3f4f6; /* Dark mode text color */
+  --bs-card-bg: #18181b; /* Dark mode card background */
+  --bs-border-color: rgba(255, 255, 255, 0.08); /* Dark mode border color */
+  --bs-light: #f3f4f6; /* Light text color */
+}
             body {
                 min-height: 100vh;
                 overflow-y: auto;
@@ -224,6 +241,25 @@
                 color: var(--bs-body-color);
                 opacity: 0.8;
             }
+            /* Add these to your existing styles */
+.text-muted {
+  color: var(--bs-body-color) !important;
+  opacity: 0.7;
+}
+
+.subtitle {
+  color: var(--bs-body-color);
+  opacity: 0.8;
+}
+
+.exercise-option p {
+  color: var(--bs-body-color);
+  opacity: 0.8;
+}
+
+.breathing-card p {
+  color: var(--bs-body-color);
+}
         </style>
     </head>
     <body>
@@ -313,11 +349,6 @@
                 </div>
             </div>
         </section>
-
-        <!-- Back to Top Button -->
-        <button id="backToTop" aria-label="Back to top">
-            <i class="fas fa-arrow-up"></i>
-        </button>
 
         <%- include('partials/footer') %>
 

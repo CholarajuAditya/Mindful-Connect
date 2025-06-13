@@ -1,0 +1,178 @@
+<%- include('partials/header') %>
+<style>
+    /* Enhanced About Vision Section */
+    .about-container {
+        display: flex;
+        flex-direction: column;
+        min-height: calc(100vh - 120px);
+        width: 100%;
+    }
+
+    .hero {
+        position: relative;
+        padding: 6rem 0;
+        text-align: center;
+    }
+
+    .hero h1 {
+        font-size: 3.5rem;
+        margin-bottom: 0;
+    }
+
+    .hero {
+        background: var(--hero-bg);
+        color: white;
+        padding: 8rem 0 6rem; /* Original padding values */
+        text-align: center;
+        position: relative;
+        overflow: hidden;
+        width: 100%;
+    }
+     .hero::before {
+        content: '';
+        position: absolute;
+        top: -50%;
+        left: -50%;
+        right: -50%;
+        bottom: -50%;
+        background: var(--glow-effect);
+        animation: rotate 20s linear infinite;
+    }
+
+    .hero h1 {
+        font-size: 3.5rem;
+        margin-bottom: 1.5rem;
+        font-weight: 800;
+        position: relative;
+        line-height: 1.2;
+    }
+
+    /* About Content Section - Keeping the improved alignment */
+    .about-content {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        padding: 2rem 0;
+        width: 100%;
+    }
+
+    .about-content {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        padding: 2rem 0;
+    }
+
+    .feature-card {
+        max-width: 800px;
+        width: 100%;
+        margin: 0 auto;
+        padding: 2rem;
+        background: var(--card-bg);
+        border: 1px solid var(--border-color);
+        border-radius: 1rem;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .feature-card h2 {
+        font-size: 2.5rem;
+        margin-bottom: 2rem;
+        text-align: center;
+    }
+
+    .feature-text {
+        font-size: 1.1rem;
+        line-height: 1.8;
+        margin-bottom: 1.5rem;
+        color: var(--light-text);
+    }
+
+    .btn-container {
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+        margin-top: 2rem;
+        gap: 1rem;
+    }
+
+    /* Responsive adjustments */
+    @media (max-width: 768px) {
+        .hero h1 {
+            font-size: 2.5rem;
+        }
+        
+        .feature-card {
+            padding: 1.5rem;
+        }
+        
+        .feature-card h2 {
+            font-size: 2rem;
+        }
+    }
+
+    @media (max-width: 576px) {
+        .hero {
+            padding: 4rem 0;
+        }
+        
+        .hero h1 {
+            font-size: 2rem;
+        }
+        
+        .feature-card h2 {
+            font-size: 1.75rem;
+        }
+        
+        .btn-container {
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .btn {
+            width: 100%;
+            text-align: center;
+        }
+    }
+</style>
+
+<!-- Hero Section -->
+<section class="hero">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-lg-10 text-center">
+        <h1 class="display-3">About <span class="text-gradient">MindfulConnect</span></h1>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- About Content Section -->
+<section class="about-content">
+  <div class="feature-card fade-in">
+    <h2 class="text-gradient">Our Vision</h2>
+    
+    <p class="feature-text">
+      We're building the next generation of digital experiences powered by cutting-edge technology and elegant design. 
+      Our platform combines the performance of modern web standards with the aesthetic appeal of thoughtful UI/UX, 
+      creating solutions that are as beautiful as they are functional. Every line of code is crafted with precision 
+      to deliver seamless interactions across all devices.
+    </p>
+    
+    <p class="feature-text">
+      At our core, we believe technology should empower and inspire. That's why we've infused our product with 
+      customizable themes, intuitive interfaces, and powerful features that adapt to your needs. Whether you're 
+      a developer looking for robust tools or an end-user seeking polished experiences, we've designed with 
+      both in mind. Our purple-hued gradient aesthetic isn't just pretty - it represents the smooth transition 
+      between ideas and reality.
+    </p>
+    
+    <div class="btn-container">
+      <a href="/developers" class="btn btn-dashboard-outline">Get In Touch</a>
+    </div>
+  </div>
+</section>
+
+<%- include('partials/footer') %>

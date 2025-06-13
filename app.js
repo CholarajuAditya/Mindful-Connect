@@ -13,6 +13,7 @@ import breathingRoutes from "./routes/breathing.js";
 import emergencyRoutes from "./routes/emergency.js";
 import communityRoutes from "./routes/community.js";
 import therapistRoutes from "./routes/therapist.js";
+import aboutRoutes from "./routes/about.js";
 
 // Configure dotenv
 dotenv.config();
@@ -51,6 +52,7 @@ app.use("/breathing", breathingRoutes);
 app.use("/emergency", emergencyRoutes);
 app.use("/community", communityRoutes);
 app.use("/therapist", therapistRoutes);
+app.use("/about",aboutRoutes);
 
 // Dashboard route
 app.get("/dashboard", (req, res) => {
