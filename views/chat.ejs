@@ -5,171 +5,6 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>MindfulConnect</title>
         <link rel="stylesheet" href="/css/chat.css" />
-        <style>
-            body {
-                min-height: 100vh;
-                overflow-y: auto;
-                padding-bottom: 2rem;
-            }
-
-            .container {
-                max-width: 1200px;
-                margin: 0 auto;
-                padding: 0 1rem;
-            }
-
-            .features {
-                padding: 2rem 0;
-            }
-
-            .community-card {
-                background-color: var(--bs-card-bg);
-                border: 1px solid var(--bs-border-color);
-                border-radius: 1rem;
-                transition: all 0.3s ease;
-                color: var(--bs-body-color);
-                margin-bottom: 2rem;
-            }
-
-            .community-card:hover {
-                transform: translateY(-5px);
-                box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-            }
-
-            .community-card .card-body {
-                padding: 2rem;
-            }
-
-            .chat-box {
-                height: 60vh;
-                min-height: 400px;
-                max-height: 600px;
-                overflow-y: auto;
-                margin-bottom: 1rem;
-                padding: 1rem;
-                background-color: var(--bs-card-bg);
-                border: 1px solid var(--bs-border-color);
-                border-radius: 0.5rem;
-                scroll-behavior: smooth;
-            }
-
-            .message {
-                margin-bottom: 1rem;
-                max-width: 80%;
-                word-wrap: break-word;
-            }
-
-            .message.user {
-                margin-left: auto;
-            }
-
-            .message.bot {
-                margin-right: auto;
-            }
-
-            .message-header {
-                display: flex;
-                align-items: center;
-                margin-bottom: 0.5rem;
-            }
-
-            .message-content {
-                padding: 0.75rem 1rem;
-                border-radius: 1rem;
-                background-color: var(--bs-primary);
-                color: white;
-            }
-
-            .message.user .message-content {
-                background-color: var(--bs-primary);
-                border-top-right-radius: 0;
-            }
-
-            .message.bot .message-content {
-                background-color: var(--bs-secondary);
-                border-top-left-radius: 0;
-            }
-
-            .intro-message {
-                text-align: center;
-                padding: 2rem;
-            }
-
-            .intro-message i {
-                font-size: 3rem;
-                color: var(--bs-primary);
-                margin-bottom: 1rem;
-            }
-
-            .chat-input {
-                margin-top: 1rem;
-            }
-
-            .chat-input .input-group {
-                background-color: var(--bs-card-bg);
-                border: 1px solid var(--bs-border-color);
-                border-radius: 0.5rem;
-                overflow: hidden;
-            }
-
-            .chat-input input {
-                border: none;
-                padding: 0.75rem 1rem;
-                background-color: transparent;
-            }
-
-            .chat-input input:focus {
-                box-shadow: none;
-                background-color: transparent;
-            }
-
-            .chat-input button {
-                padding: 0.75rem 1.25rem;
-            }
-
-            #loading {
-                display: none;
-            }
-
-            .error-msg {
-                background-color: var(--bs-danger);
-                color: white;
-                padding: 0.75rem 1rem;
-                border-radius: 0.5rem;
-                margin-top: 1rem;
-                text-align: center;
-            }
-
-            #backToTop {
-                position: fixed;
-                bottom: 20px;
-                right: 20px;
-                width: 40px;
-                height: 40px;
-                background-color: var(--bs-primary);
-                color: var(--bs-light);
-                border-radius: 50%;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                cursor: pointer;
-                opacity: 0;
-                transition: all 0.3s ease;
-                z-index: 1000;
-                border: none;
-                padding: 0;
-                font-size: 1.2rem;
-            }
-
-            #backToTop.visible {
-                opacity: 1;
-            }
-
-            #backToTop:hover {
-                background-color: var(--bs-primary-dark);
-                transform: translateY(-3px);
-            }
-        </style>
     </head>
     <body>
         <%- include('partials/header-logged-in') %>
@@ -180,7 +15,7 @@
                 <div class="row justify-content-center">
                     <div class="col-lg-10 text-center">
                         <h1 class="display-3">AI Chat <span class="text-gradient">Support</span></h1>
-                        <p class="subtitle mb-4">Get immediate support and guidance from our AI assistant</p>
+                        <p class="subtitle mb-4">Start your conversation for peace of mind.</p>
                     </div>
                 </div>
             </div>
@@ -253,11 +88,6 @@
                 </div>
             </div>
         </section>
-
-        <!-- Back to Top Button -->
-        <button id="backToTop" aria-label="Back to top">
-            <i class="fas fa-arrow-up"></i>
-        </button>
 
         <%- include('partials/footer') %>
 
