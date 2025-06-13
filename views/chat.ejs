@@ -4,12 +4,12 @@
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>MindfulConnect</title>
-        <link rel="stylesheet" href="/css/chat.css" />
         <style>
             body {
                 min-height: 100vh;
                 overflow-y: auto;
                 padding-bottom: 2rem;
+                background-color: var(--bs-body-bg);
             }
 
             .container {
@@ -29,6 +29,7 @@
                 transition: all 0.3s ease;
                 color: var(--bs-body-color);
                 margin-bottom: 2rem;
+                box-shadow: 0 2px 4px rgba(0,0,0,0.05);
             }
 
             .community-card:hover {
@@ -71,6 +72,11 @@
                 display: flex;
                 align-items: center;
                 margin-bottom: 0.5rem;
+                font-size: 0.9rem;
+            }
+
+            .message-header strong {
+                color: var(--bs-primary);
             }
 
             .message-content {
@@ -78,6 +84,8 @@
                 border-radius: 1rem;
                 background-color: var(--bs-primary);
                 color: white;
+                font-size: 1rem;
+                line-height: 1.5;
             }
 
             .message.user .message-content {
@@ -93,10 +101,16 @@
             .intro-message {
                 text-align: center;
                 padding: 2rem;
+                color: var(--bs-body-color);
             }
 
             .intro-message i {
                 font-size: 3rem;
+                color: var(--bs-primary);
+                margin-bottom: 1rem;
+            }
+
+            .intro-message h3 {
                 color: var(--bs-primary);
                 margin-bottom: 1rem;
             }
@@ -110,12 +124,19 @@
                 border: 1px solid var(--bs-border-color);
                 border-radius: 0.5rem;
                 overflow: hidden;
+                transition: all 0.3s ease;
+            }
+
+            .chat-input .input-group:focus-within {
+                border-color: var(--bs-primary);
+                box-shadow: 0 0 0 0.2rem rgba(var(--bs-primary-rgb), 0.25);
             }
 
             .chat-input input {
                 border: none;
                 padding: 0.75rem 1rem;
                 background-color: transparent;
+                color: var(--bs-body-color);
             }
 
             .chat-input input:focus {
@@ -123,8 +144,17 @@
                 background-color: transparent;
             }
 
+            .chat-input input::placeholder {
+                color: var(--bs-gray-500);
+            }
+
             .chat-input button {
                 padding: 0.75rem 1.25rem;
+                transition: all 0.3s ease;
+            }
+
+            .chat-input button:hover {
+                transform: translateY(-2px);
             }
 
             #loading {
@@ -138,6 +168,12 @@
                 border-radius: 0.5rem;
                 margin-top: 1rem;
                 text-align: center;
+                animation: fadeIn 0.3s ease;
+            }
+
+            @keyframes fadeIn {
+                from { opacity: 0; transform: translateY(-10px); }
+                to { opacity: 1; transform: translateY(0); }
             }
 
             #backToTop {
@@ -159,6 +195,7 @@
                 border: none;
                 padding: 0;
                 font-size: 1.2rem;
+                box-shadow: 0 2px 5px rgba(0,0,0,0.2);
             }
 
             #backToTop.visible {
@@ -168,6 +205,26 @@
             #backToTop:hover {
                 background-color: var(--bs-primary-dark);
                 transform: translateY(-3px);
+                box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+            }
+
+            /* Custom scrollbar */
+            .chat-box::-webkit-scrollbar {
+                width: 8px;
+            }
+
+            .chat-box::-webkit-scrollbar-track {
+                background: var(--bs-card-bg);
+                border-radius: 4px;
+            }
+
+            .chat-box::-webkit-scrollbar-thumb {
+                background: var(--bs-primary);
+                border-radius: 4px;
+            }
+
+            .chat-box::-webkit-scrollbar-thumb:hover {
+                background: var(--bs-primary-dark);
             }
         </style>
     </head>
@@ -263,86 +320,87 @@
 
         <script>
             document.addEventListener('DOMContentLoaded', function() {
-                const form = document.getElementById('chatForm');
-                const input = document.querySelector('input[name="userInput"]');
+                const chatBox = document.getElementById('chatBox');
+                const chatForm = document.getElementById('chatForm');
+                const userInput = chatForm.querySelector('input[name="userInput"]');
+                const sendBtn = document.getElementById('sendBtn');
+                const clearBtn = document.getElementById('clearBtn');
                 const loading = document.getElementById('loading');
-                const chatBox = document.querySelector('.chat-box');
                 const backToTop = document.getElementById('backToTop');
 
-                // Scroll to bottom
-                function scrollToBottom() {
-                    chatBox.scrollTop = chatBox.scrollHeight;
-                }
-
-                // Initial scroll
-                scrollToBottom();
-
-                // Auto-scroll when new messages are added
-                const observer = new MutationObserver(scrollToBottom);
-                observer.observe(chatBox, { childList: true, subtree: true });
+                // Focus input on load
+                userInput.focus();
 
                 // Handle form submission
-                form.addEventListener('submit', async (e) => {
+                chatForm.addEventListener('submit', async function(e) {
                     e.preventDefault();
                     
-                    if (!input.value.trim()) {
-                        showError("Please enter a message");
-                        return;
-                    }
+                    const message = userInput.value.trim();
+                    if (!message) return;
+
+                    // Disable input and button while sending
+                    userInput.disabled = true;
+                    sendBtn.disabled = true;
+
+                    // Show loading indicator
+                    loading.style.display = 'block';
+                    chatBox.scrollTop = chatBox.scrollHeight;
 
                     try {
-                        loading.style.display = 'block';
-                        scrollToBottom();
-
                         const response = await fetch('/chat', {
                             method: 'POST',
                             headers: {
-                                'Content-Type': 'application/json'
+                                'Content-Type': 'application/json',
                             },
-                            body: JSON.stringify({ userInput: input.value.trim() })
+                            body: JSON.stringify({ userInput: message })
                         });
 
                         if (!response.ok) {
                             throw new Error('Failed to send message');
                         }
 
-                        input.value = '';
+                        // Clear input
+                        userInput.value = '';
+                        
+                        // Reload page to show new messages
                         window.location.reload();
                     } catch (error) {
-                        showError("Failed to send message. Please try again.");
+                        console.error('Error:', error);
+                        const errorMsg = document.createElement('div');
+                        errorMsg.className = 'error-msg';
+                        errorMsg.textContent = 'Failed to send message. Please try again.';
+                        chatForm.parentNode.insertBefore(errorMsg, chatForm);
+                        setTimeout(() => errorMsg.remove(), 5000);
+                    } finally {
+                        // Re-enable input and button
+                        userInput.disabled = false;
+                        sendBtn.disabled = false;
                         loading.style.display = 'none';
+                        userInput.focus();
                     }
                 });
 
-                function showError(msg) {
-                    let existing = document.querySelector(".error-msg");
-                    if (existing) existing.remove();
+                // Clear chat history
+                clearBtn.addEventListener('click', async function() {
+                    if (!confirm('Are you sure you want to clear the conversation?')) return;
 
-                    const error = document.createElement("div");
-                    error.className = "error-msg";
-                    error.textContent = msg;
-                    form.parentNode.insertBefore(error, form);
-                }
+                    try {
+                        const response = await fetch('/chat/clear', {
+                            method: 'POST'
+                        });
 
-                // Handle clear button
-                document.getElementById("clearBtn").addEventListener("click", async () => {
-                    if (confirm("Clear conversation history?")) {
-                        try {
-                            const response = await fetch('/clear-chat', {
-                                method: 'POST',
-                                headers: {
-                                    'Content-Type': 'application/json'
-                                }
-                            });
-
-                            if (response.ok) {
-                                window.location.reload();
-                            } else {
-                                showError("Failed to clear chat history");
-                            }
-                        } catch (error) {
-                            showError("Error clearing chat history");
+                        if (!response.ok) {
+                            throw new Error('Failed to clear chat');
                         }
+
+                        window.location.reload();
+                    } catch (error) {
+                        console.error('Error:', error);
+                        const errorMsg = document.createElement('div');
+                        errorMsg.className = 'error-msg';
+                        errorMsg.textContent = 'Failed to clear chat. Please try again.';
+                        chatForm.parentNode.insertBefore(errorMsg, chatForm);
+                        setTimeout(() => errorMsg.remove(), 5000);
                     }
                 });
 
@@ -362,8 +420,15 @@
                     });
                 });
 
-                // Focus input on load
-                input.focus();
+                // Auto-scroll to bottom when new messages arrive
+                const observer = new MutationObserver(() => {
+                    chatBox.scrollTop = chatBox.scrollHeight;
+                });
+
+                observer.observe(chatBox, {
+                    childList: true,
+                    subtree: true
+                });
             });
         </script>
     </body>
