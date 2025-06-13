@@ -74,15 +74,16 @@
 
 <style>
 .emergency-card {
-  background-color: var(--bs-dark);
-  border: none;
+  background-color: var(--bs-card-bg);
+  border: 1px solid var(--bs-border-color);
   border-radius: 1rem;
   transition: all 0.3s ease;
+  color: var(--bs-body-color);
 }
 
 .emergency-card:hover {
   transform: translateY(-5px);
-  box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
 }
 
 .emergency-card .card-body {
@@ -95,7 +96,7 @@
 }
 
 .emergency-card p {
-  color: var(--bs-light);
+  color: var(--bs-body-color);
   opacity: 0.8;
 }
 
@@ -108,6 +109,54 @@
   margin-right: 0.5rem;
 }
 
+.emergency-card .btn-danger {
+  background-color: var(--bs-danger);
+  border-color: var(--bs-danger);
+  color: var(--bs-light);
+}
+
+.emergency-card .btn-danger:hover {
+  background-color: var(--bs-danger-dark);
+  border-color: var(--bs-danger-dark);
+  color: var(--bs-light);
+}
+
+/* Helpline List */
+.emergency-card ul {
+  color: var(--bs-body-color);
+  list-style: none;
+  padding-left: 0;
+}
+
+.emergency-card ul li {
+  color: var(--bs-body-color);
+  margin-bottom: 0.5rem;
+}
+
+.emergency-card ul li i {
+  color: var(--bs-primary);
+  margin-right: 0.5rem;
+}
+
+/* Theme-specific styles */
+[data-bs-theme="light"] .emergency-card {
+  background-color: #fff;
+  color: #212529;
+}
+
+[data-bs-theme="light"] .emergency-card p {
+  color: #6c757d;
+}
+
+[data-bs-theme="dark"] .emergency-card {
+  background-color: #212529;
+  color: #fff;
+}
+
+[data-bs-theme="dark"] .emergency-card p {
+  color: #adb5bd;
+}
+
 #backToTop {
   position: fixed;
   bottom: 20px;
@@ -115,7 +164,7 @@
   width: 40px;
   height: 40px;
   background-color: var(--bs-primary);
-  color: white;
+  color: var(--bs-light);
   border-radius: 50%;
   display: flex;
   align-items: center;

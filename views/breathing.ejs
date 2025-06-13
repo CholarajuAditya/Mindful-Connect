@@ -1,0 +1,355 @@
+<%- include('partials/header-logged-in') %>
+
+<!-- Hero Section -->
+<section class="hero">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-lg-10 text-center">
+        <h1 class="display-3">Breathing <span class="text-gradient">Exercises</span></h1>
+        <p class="subtitle mb-4">Guided breathing techniques for stress relief and relaxation</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Exercise Selection -->
+<section class="features py-6">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-lg-8">
+        <div class="breathing-card mb-4">
+          <div class="card-body">
+            <h3 class="text-center mb-4">Choose Your Exercise</h3>
+            <div class="row g-4">
+              <div class="col-md-6">
+                <div class="exercise-option">
+                  <h4 class="h5 mb-3">4-7-8 Breathing</h4>
+                  <p class="text-muted">Calming technique for anxiety and sleep</p>
+                  <button class="btn btn-primary w-100" onclick="startExercise('478')">
+                    <i class="fas fa-play me-2"></i>Start Exercise
+                  </button>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="exercise-option">
+                  <h4 class="h5 mb-3">Box Breathing</h4>
+                  <p class="text-muted">Balanced breathing for stress management</p>
+                  <button class="btn btn-primary w-100" onclick="startExercise('box')">
+                    <i class="fas fa-play me-2"></i>Start Exercise
+                  </button>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="exercise-option">
+                  <h4 class="h5 mb-3">Deep Breathing</h4>
+                  <p class="text-muted">Simple technique for immediate relaxation</p>
+                  <button class="btn btn-primary w-100" onclick="startExercise('deep')">
+                    <i class="fas fa-play me-2"></i>Start Exercise
+                  </button>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="exercise-option">
+                  <h4 class="h5 mb-3">Alternate Nostril</h4>
+                  <p class="text-muted">Balancing technique for mental clarity</p>
+                  <button class="btn btn-primary w-100" onclick="startExercise('alternate')">
+                    <i class="fas fa-play me-2"></i>Start Exercise
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Exercise Instructions -->
+        <div id="exerciseInstructions" class="breathing-card" style="display: none;">
+          <div class="card-body">
+            <h3 class="text-center mb-4" id="exerciseTitle">Exercise Title</h3>
+            <div class="text-center mb-4">
+              <div class="breathing-circle" id="breathingCircle">
+                <span id="breathingText">Breathe In</span>
+              </div>
+            </div>
+            <div class="text-center">
+              <button class="btn btn-primary me-2" onclick="startExercise()">
+                <i class="fas fa-play me-2"></i>Start
+              </button>
+              <button class="btn btn-outline-primary" onclick="resetExercise()">
+                <i class="fas fa-redo me-2"></i>Reset
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Back to Top Button -->
+<button id="backToTop" aria-label="Back to top">
+  <i class="fas fa-arrow-up"></i>
+</button>
+
+<%- include('partials/footer') %>
+
+<style>
+.breathing-card {
+  background-color: var(--bs-card-bg);
+  border: 1px solid var(--bs-border-color);
+  border-radius: 1rem;
+  transition: all 0.3s ease;
+  color: var(--bs-body-color);
+}
+
+.breathing-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+.breathing-card .card-body {
+  padding: 2rem;
+}
+
+.breathing-card h3 {
+  color: var(--bs-primary);
+  margin-bottom: 1rem;
+}
+
+.breathing-card p {
+  color: var(--bs-body-color);
+  opacity: 0.8;
+}
+
+.breathing-card .btn {
+  padding: 0.5rem 1.5rem;
+  font-weight: 500;
+}
+
+.breathing-card .btn i {
+  margin-right: 0.5rem;
+}
+
+.exercise-option {
+  background-color: var(--bs-card-bg);
+  border: 1px solid var(--bs-border-color);
+  border-radius: 0.5rem;
+  padding: 1.5rem;
+  height: 100%;
+  color: var(--bs-body-color);
+}
+
+.exercise-option h4 {
+  color: var(--bs-primary);
+}
+
+.exercise-option p {
+  color: var(--bs-body-color);
+  opacity: 0.8;
+}
+
+.breathing-circle {
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  background-color: var(--bs-primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto;
+  transition: all 4s ease;
+}
+
+.breathing-circle span {
+  color: var(--bs-light);
+  font-size: 1.5rem;
+  font-weight: 500;
+}
+
+/* Exercise Instructions */
+#exerciseInstructions {
+  background-color: var(--bs-card-bg);
+  color: var(--bs-body-color);
+}
+
+#exerciseInstructions h3 {
+  color: var(--bs-primary);
+}
+
+#exerciseInstructions p {
+  color: var(--bs-body-color);
+}
+
+#exerciseTitle {
+  color: var(--bs-primary);
+}
+
+#breathingText {
+  color: var(--bs-light);
+}
+
+#backToTop {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  width: 40px;
+  height: 40px;
+  background-color: var(--bs-primary);
+  color: var(--bs-light);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  opacity: 0;
+  transition: all 0.3s ease;
+  z-index: 1000;
+  border: none;
+  padding: 0;
+  font-size: 1.2rem;
+}
+
+#backToTop.visible {
+  opacity: 1;
+}
+
+#backToTop:hover {
+  background-color: var(--bs-primary-dark);
+  transform: translateY(-3px);
+}
+</style>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  const backToTop = document.getElementById('backToTop');
+  
+  window.addEventListener('scroll', () => {
+    if (window.pageYOffset > 300) {
+      backToTop.classList.add('visible');
+    } else {
+      backToTop.classList.remove('visible');
+    }
+  });
+  
+  backToTop.addEventListener('click', () => {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    });
+  });
+});
+
+let currentExercise = null;
+let isExercising = false;
+
+function startExercise(type) {
+  const instructions = document.getElementById('exerciseInstructions');
+  const title = document.getElementById('exerciseTitle');
+  const circle = document.getElementById('breathingCircle');
+  const text = document.getElementById('breathingText');
+  
+  if (type) {
+    currentExercise = type;
+    instructions.style.display = 'block';
+    
+    switch(type) {
+      case '478':
+        title.textContent = '4-7-8 Breathing';
+        break;
+      case 'box':
+        title.textContent = 'Box Breathing';
+        break;
+      case 'deep':
+        title.textContent = 'Deep Breathing';
+        break;
+      case 'alternate':
+        title.textContent = 'Alternate Nostril Breathing';
+        break;
+    }
+  }
+  
+  if (!isExercising) {
+    isExercising = true;
+    let phase = 0;
+    
+    const interval = setInterval(() => {
+      if (!isExercising) {
+        clearInterval(interval);
+        return;
+      }
+      
+      switch(currentExercise) {
+        case '478':
+          if (phase === 0) {
+            text.textContent = 'Breathe In (4)';
+            circle.style.transform = 'scale(1.2)';
+            setTimeout(() => phase++, 4000);
+          } else if (phase === 1) {
+            text.textContent = 'Hold (7)';
+            setTimeout(() => phase++, 7000);
+          } else if (phase === 2) {
+            text.textContent = 'Breathe Out (8)';
+            circle.style.transform = 'scale(1)';
+            setTimeout(() => phase = 0, 8000);
+          }
+          break;
+          
+        case 'box':
+          if (phase === 0) {
+            text.textContent = 'Breathe In (4)';
+            circle.style.transform = 'scale(1.2)';
+            setTimeout(() => phase++, 4000);
+          } else if (phase === 1) {
+            text.textContent = 'Hold (4)';
+            setTimeout(() => phase++, 4000);
+          } else if (phase === 2) {
+            text.textContent = 'Breathe Out (4)';
+            circle.style.transform = 'scale(1)';
+            setTimeout(() => phase++, 4000);
+          } else {
+            text.textContent = 'Hold (4)';
+            setTimeout(() => phase = 0, 4000);
+          }
+          break;
+          
+        case 'deep':
+          if (phase === 0) {
+            text.textContent = 'Breathe In';
+            circle.style.transform = 'scale(1.2)';
+            setTimeout(() => phase++, 4000);
+          } else {
+            text.textContent = 'Breathe Out';
+            circle.style.transform = 'scale(1)';
+            setTimeout(() => phase = 0, 4000);
+          }
+          break;
+          
+        case 'alternate':
+          if (phase === 0) {
+            text.textContent = 'Right Nostril In';
+            circle.style.transform = 'scale(1.2)';
+            setTimeout(() => phase++, 4000);
+          } else if (phase === 1) {
+            text.textContent = 'Hold';
+            setTimeout(() => phase++, 4000);
+          } else if (phase === 2) {
+            text.textContent = 'Left Nostril Out';
+            circle.style.transform = 'scale(1)';
+            setTimeout(() => phase++, 4000);
+          } else {
+            text.textContent = 'Switch';
+            setTimeout(() => phase = 0, 2000);
+          }
+          break;
+      }
+    }, 100);
+  }
+}
+
+function resetExercise() {
+  isExercising = false;
+  const circle = document.getElementById('breathingCircle');
+  const text = document.getElementById('breathingText');
+  circle.style.transform = 'scale(1)';
+  text.textContent = 'Breathe In';
+}
+</script> 

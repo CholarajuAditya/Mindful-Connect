@@ -12,6 +12,7 @@ import moodRoutes from "./routes/mood.js";
 import breathingRoutes from "./routes/breathing.js";
 import emergencyRoutes from "./routes/emergency.js";
 import communityRoutes from "./routes/community.js";
+import therapistRoutes from "./routes/therapist.js";
 
 // Configure dotenv
 dotenv.config();
@@ -49,6 +50,7 @@ app.use("/mood-tracker", moodRoutes);
 app.use("/breathing", breathingRoutes);
 app.use("/emergency", emergencyRoutes);
 app.use("/community", communityRoutes);
+app.use("/therapist", therapistRoutes);
 
 // Dashboard route
 app.get("/dashboard", (req, res) => {
@@ -75,14 +77,19 @@ app.post("/auth/register", (reqcl, res) => {
 import mongoose from "mongoose";
 
 const PORT = process.env.PORT || 8000;
-app.listen(PORT, async () => {
-    try {
-        await mongoose.connect(process.env.MONGO_ATLAS_URI);
-        console.log("DB connected successfully");
-        console.log(`Server running at http://localhost:${PORT}`);
-    } catch (error) {
-        console.log(error);
-    }
+
+// Database connection
+mongoose.connect(process.env.MONGO_ATLAS_URI)
+    .then(() => {
+        console.log("Connected to MongoDB successfully");
+    })
+    .catch((error) => {
+        console.error("MongoDB connection error:", error);
+    });
+
+// Start server
+app.listen(PORT, () => {
+    console.log(`Server running at http://localhost:${PORT}`);
 });
 
 export default app;

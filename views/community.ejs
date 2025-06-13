@@ -1,251 +1,308 @@
 <%- include('partials/header-logged-in') %>
 
-<!-- Community Hero Section -->
-<section class="community-hero py-5">
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-lg-8 text-center">
-                <h1 class="display-4 mb-4">Community Support</h1>
-                <p class="subtitle mb-4">
-                    Ask questions and get support from our community
-                </p>
-                <button id="askQuestionBtn" class="btn btn-primary btn-lg px-4">
-                    <i class="fas fa-plus me-2"></i>Ask a Question
-                </button>
-            </div>
-        </div>
+<!-- Hero Section -->
+<section class="hero">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-lg-10 text-center">
+        <h1 class="display-3">Community <span class="text-gradient">Support</span></h1>
+        <p class="subtitle mb-4">Connect with others on their mental health journey</p>
+      </div>
     </div>
+  </div>
 </section>
 
-<!-- Main Community Content -->
-<div class="community-container py-5">
-    <div class="container">
-        <div class="row">
-            <!-- Questions Column -->
-            <div class="col-lg-8">
-                <!-- Ask Question Form (Initially hidden) -->
-                <div
-                    id="askQuestionForm"
-                    class="card mb-4"
-                    style="display: none;"
-                >
-                    <div class="card-body">
-                        <h3 class="card-title mb-4">Ask a Question</h3>
-                        <form id="questionForm">
-                            <div class="mb-3">
-                                <label for="questionTitle" class="form-label"
-                                    >Title</label
-                                >
-                                <input
-                                    type="text"
-                                    class="form-control"
-                                    id="questionTitle"
-                                    required
-                                />
-                            </div>
-                            <div class="mb-3">
-                                <label for="questionContent" class="form-label"
-                                    >Details</label
-                                >
-                                <textarea
-                                    class="form-control"
-                                    id="questionContent"
-                                    rows="5"
-                                    required
-                                ></textarea>
-                            </div>
-                            <div class="mb-3">
-                                <label class="form-label"
-                                    >Tags (Optional)</label
-                                >
-                                <select
-                                    id="questionTags"
-                                    class="form-select"
-                                    multiple
-                                >
-                                    <option value="anxiety">Anxiety</option>
-                                    <option value="depression">
-                                        Depression
-                                    </option>
-                                    <option value="stress">Stress</option>
-                                    <option value="relationships">
-                                        Relationships
-                                    </option>
-                                    <option value="self-care">Self-Care</option>
-                                    <option value="therapy">Therapy</option>
-                                    <option value="mindfulness">
-                                        Mindfulness
-                                    </option>
-                                    <option value="other">Other</option>
-                                </select>
-                            </div>
-                            <div class="d-flex justify-content-end gap-2">
-                                <button
-                                    type="button"
-                                    id="cancelQuestion"
-                                    class="btn btn-outline"
-                                >
-                                    Cancel
-                                </button>
-                                <button type="submit" class="btn btn-primary">
-                                    Post Question
-                                </button>
-                            </div>
-                        </form>
+<!-- Community Features -->
+<section class="features py-6">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-lg-8">
+        <!-- Discussion Forums -->
+        <div class="community-card mb-4">
+          <div class="card-body">
+            <h3><i class="fas fa-comments me-2"></i>Discussion Forums</h3>
+            <p>Join conversations about mental health, share experiences, and support others</p>
+            <div class="forum-topics">
+              <% if (posts && posts.length > 0) { %>
+                <% posts.forEach(post => { %>
+                  <div class="topic-item">
+                    <h4><a href="/community/<%= post._id %>" class="text-decoration-none text-primary"><%= post.title %></a></h4>
+                    <div class="d-flex align-items-center mb-2">
+                      <small class="text-muted">Posted by <%= post.author.name %> • <%= new Date(post.createdAt).toLocaleDateString() %></small>
                     </div>
-                </div>
-
-                <!-- Questions List -->
-                <% if (posts && posts.length > 0) { %> <% posts.forEach(post =>
-                { %>
-                <div class="card mb-3 question-card">
-                    <div class="card-body">
-                        <div
-                            class="d-flex justify-content-between align-items-start mb-2"
-                        >
-                            <h5 class="card-title mb-0">
-                                <a
-                                    href="/community/<%= post._id %>"
-                                    class="text-decoration-none"
-                                    ><%= post.title %></a
-                                >
-                            </h5>
-                            <% if (post.tags && post.tags.length > 0) { %>
-                            <div class="tags">
-                                <% post.tags.forEach(tag => { %>
-                                <span class="badge bg-light text-dark"
-                                    ><%= tag %></span
-                                >
-                                <% }); %>
-                            </div>
-                            <% } %>
-                        </div>
-                        <p class="card-text text-muted mb-3">
-                            <%= post.content.substring(0, 150) %><%=
-                            post.content.length > 150 ? '...' : '' %>
-                        </p>
-                        <div
-                            class="d-flex justify-content-between align-items-center"
-                        >
-                            <small class="text-muted">
-                                Posted by <%= post.isAnonymous ? 'Anonymous' :
-                                post.author.name %>
-                            </small>
-                            <small class="text-muted">
-                                <%= post.answers ? post.answers.length : 0 %>
-                                answers
-                            </small>
-                        </div>
+                    <p class="mb-2"><%= post.content.substring(0, 150) %>...</p>
+                    <div class="d-flex gap-2">
+                      <% post.tags.forEach(tag => { %>
+                        <span class="badge bg-primary"><%= tag %></span>
+                      <% }); %>
                     </div>
+                    <div class="mt-2">
+                      <small class="text-muted">
+                        <i class="fas fa-comments me-1"></i>
+                        <%= post.answers ? post.answers.length : 0 %> answers
+                      </small>
+                    </div>
+                  </div>
+                <% }); %>
+              <% } else { %>
+                <div class="alert alert-info">
+                  No questions yet. Be the first to ask!
                 </div>
-                <% }); %> <% } else { %>
-                <div class="text-center py-5">
-                    <i class="fas fa-question-circle fa-3x mb-3 text-muted"></i>
-                    <h5 class="mb-3">No questions yet</h5>
-                    <p class="text-muted">Be the first to ask a question!</p>
-                </div>
-                <% } %>
+              <% } %>
             </div>
-
-            <!-- Sidebar Column -->
-            <div class="col-lg-4">
-                <div class="card mb-4">
-                    <div class="card-body">
-                        <h5 class="card-title mb-3">
-                            <i class="fas fa-info-circle me-2 text-primary"></i
-                            >Community Guidelines
-                        </h5>
-                        <ul class="list-unstyled">
-                            <li class="mb-2">
-                                <i
-                                    class="fas fa-check-circle text-primary me-2"
-                                ></i
-                                >Be kind and supportive
-                            </li>
-                            <li class="mb-2">
-                                <i
-                                    class="fas fa-check-circle text-primary me-2"
-                                ></i
-                                >Respect privacy
-                            </li>
-                            <li class="mb-2">
-                                <i
-                                    class="fas fa-check-circle text-primary me-2"
-                                ></i
-                                >No medical advice
-                            </li>
-                            <li>
-                                <i
-                                    class="fas fa-check-circle text-primary me-2"
-                                ></i
-                                >Use trigger warnings
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
+            <button class="btn btn-primary mt-3" data-bs-toggle="modal" data-bs-target="#newDiscussionModal">
+              <i class="fas fa-plus me-2"></i>Start Discussion
+            </button>
+          </div>
         </div>
+
+        <!-- Success Stories -->
+        <div class="community-card">
+          <div class="card-body">
+            <h3><i class="fas fa-star me-2"></i>Success Stories</h3>
+            <p>Read and share inspiring stories of recovery and growth</p>
+            <div class="story-list">
+              <% if (successStories && successStories.length > 0) { %>
+                <% successStories.forEach(story => { %>
+                  <div class="story-item">
+                    <h4><%= story.title %></h4>
+                    <p class="text-muted">By <%= story.author.name %> • <%= new Date(story.createdAt).toLocaleDateString() %></p>
+                    <p><%= story.content.substring(0, 150) %>...</p>
+                  </div>
+                <% }); %>
+              <% } else { %>
+                <div class="story-item">
+                  <h4>No success stories yet</h4>
+                  <p>Share your journey to inspire others!</p>
+                </div>
+              <% } %>
+            </div>
+            <button class="btn btn-primary mt-3" data-bs-toggle="modal" data-bs-target="#newStoryModal">
+              <i class="fas fa-plus me-2"></i>Share Your Story
+            </button>
+          </div>
+        </div>
+      </div>
     </div>
-</div>
+  </div>
+</section>
 
-<script>
-    document.addEventListener('DOMContentLoaded', function() {
-      // Toggle question form
-      const askQuestionBtn = document.getElementById('askQuestionBtn');
-      const askQuestionForm = document.getElementById('askQuestionForm');
-      const cancelQuestionBtn = document.getElementById('cancelQuestion');
-
-      if (askQuestionBtn && askQuestionForm && cancelQuestionBtn) {
-        askQuestionBtn.addEventListener('click', function() {
-          askQuestionForm.style.display = 'block';
-          window.scrollTo({
-            top: askQuestionForm.offsetTop - 20,
-            behavior: 'smooth'
-          });
-        });
-
-        cancelQuestionBtn.addEventListener('click', function() {
-          askQuestionForm.style.display = 'none';
-        });
-      }
-
-      // Handle question form submission
-      const questionForm = document.getElementById('questionForm');
-      if (questionForm) {
-        questionForm.addEventListener('submit', async function(e) {
-          e.preventDefault();
-
-          const title = document.getElementById('questionTitle').value.trim();
-          const content = document.getElementById('questionContent').value.trim();
-          const tagSelect = document.getElementById('questionTags');
-          const tags = Array.from(tagSelect.selectedOptions).map(option => option.value);
-
-          try {
-            const response = await fetch('/community', {
-              method: 'POST',
-              headers: {
-                'Content-Type': 'application/json',
-              },
-              body: JSON.stringify({ title, content, tags })
-            });
-
-            if (response.redirected) {
-              window.location.href = response.url;
-            } else {
-              const result = await response.json();
-              if (result.error) {
-                alert(result.error);
-              } else {
-                window.location.reload();
-              }
-            }
-          } catch (error) {
-            console.error('Error:', error);
-            alert('An error occurred while posting your question');
-          }
-        });
-      }
-    });
-</script>
+<!-- Back to Top Button -->
+<button id="backToTop" aria-label="Back to top">
+  <i class="fas fa-arrow-up"></i>
+</button>
 
 <%- include('partials/footer') %>
+
+<style>
+.community-card {
+  background-color: var(--bs-card-bg);
+  border: 1px solid var(--bs-border-color);
+  border-radius: 1rem;
+  transition: all 0.3s ease;
+  color: var(--bs-body-color);
+}
+
+.community-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+.community-card .card-body {
+  padding: 2rem;
+}
+
+.community-card h3 {
+  color: var(--bs-primary);
+  margin-bottom: 1rem;
+}
+
+.community-card p {
+  color: var(--bs-body-color);
+  opacity: 0.9;
+}
+
+.community-card .btn {
+  padding: 0.5rem 1.5rem;
+  font-weight: 500;
+}
+
+.community-card .btn i {
+  margin-right: 0.5rem;
+}
+
+/* Forum Topics */
+.forum-topics {
+  margin: 1.5rem 0;
+}
+
+.topic-item {
+  background-color: var(--bs-card-bg);
+  border: 1px solid var(--bs-border-color);
+  border-radius: 0.5rem;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  color: var(--bs-body-color);
+}
+
+.topic-item h4 {
+  color: var(--bs-primary);
+  margin-bottom: 0.5rem;
+}
+
+.topic-item h4 a {
+  color: var(--bs-primary);
+  text-decoration: none;
+}
+
+.topic-item h4 a:hover {
+  color: var(--bs-primary-dark);
+}
+
+.topic-item p {
+  margin-bottom: 0.5rem;
+  color: var(--bs-body-color);
+  opacity: 0.9;
+}
+
+/* Success Stories */
+.story-list {
+  margin: 1.5rem 0;
+}
+
+.story-item {
+  background-color: var(--bs-card-bg);
+  border: 1px solid var(--bs-border-color);
+  border-radius: 0.5rem;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  color: var(--bs-body-color);
+}
+
+.story-item h4 {
+  color: var(--bs-primary);
+  margin-bottom: 0.5rem;
+}
+
+.story-item p {
+  margin-bottom: 0.5rem;
+  color: var(--bs-body-color);
+  opacity: 0.9;
+}
+
+.story-item .text-muted {
+  color: var(--bs-secondary) !important;
+  opacity: 0.8;
+}
+
+#backToTop {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  width: 40px;
+  height: 40px;
+  background-color: var(--bs-primary);
+  color: var(--bs-light);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  opacity: 0;
+  transition: all 0.3s ease;
+  z-index: 1000;
+  border: none;
+  padding: 0;
+  font-size: 1.2rem;
+}
+
+#backToTop.visible {
+  opacity: 1;
+}
+
+#backToTop:hover {
+  background-color: var(--bs-primary-dark);
+  transform: translateY(-3px);
+}
+</style>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  const backToTop = document.getElementById('backToTop');
+  
+  window.addEventListener('scroll', () => {
+    if (window.pageYOffset > 300) {
+      backToTop.classList.add('visible');
+    } else {
+      backToTop.classList.remove('visible');
+    }
+  });
+  
+  backToTop.addEventListener('click', () => {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    });
+  });
+});
+</script>
+
+<!-- New Discussion Modal -->
+<div class="modal fade" id="newDiscussionModal" tabindex="-1">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Start a Discussion</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body">
+        <form action="/community" method="POST">
+          <input type="hidden" name="type" value="discussion">
+          <div class="mb-3">
+            <label class="form-label">Title</label>
+            <input type="text" class="form-control" name="title" required>
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Content</label>
+            <textarea class="form-control" name="content" rows="4" required></textarea>
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Tags (comma-separated)</label>
+            <input type="text" class="form-control" name="tags" placeholder="e.g., anxiety, stress, mindfulness">
+          </div>
+          <button type="submit" class="btn btn-primary">Post Discussion</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- New Story Modal -->
+<div class="modal fade" id="newStoryModal" tabindex="-1">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Share Your Story</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body">
+        <form action="/community" method="POST">
+          <input type="hidden" name="type" value="success_story">
+          <div class="mb-3">
+            <label class="form-label">Title</label>
+            <input type="text" class="form-control" name="title" required>
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Your Story</label>
+            <textarea class="form-control" name="content" rows="6" required></textarea>
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Tags (comma-separated)</label>
+            <input type="text" class="form-control" name="tags" placeholder="e.g., recovery, growth, inspiration">
+          </div>
+          <button type="submit" class="btn btn-primary">Share Story</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

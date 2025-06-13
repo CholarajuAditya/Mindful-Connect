@@ -1,36 +1,45 @@
 import express from "express";
 import Post from "../models/community/post.js";
 import Answer from "../models/community/answer.js";
+import Community from '../models/Community.js';
+import { isAuthenticated } from '../middleware/auth.js';
 
 const router = express.Router();
 
-// Middleware to check if user is logged in
-const isAuthenticated = (req, res, next) => {
-    if (req.session.user) {
-        next();
-    } else {
-        res.redirect("/auth/login");
-    }
-};
-
-// Get all community questions
+// Get all community content
 router.get("/", isAuthenticated, async (req, res) => {
     try {
-        const posts = await Post.find()
-            .populate("author", "name avatar")
-            .sort("-createdAt")
-            .limit(10)
-            .exec();
+        // Fetch all types of content
+        const [discussions, successStories, posts] = await Promise.all([
+            Community.find({ type: 'discussion' })
+                .populate('author', 'name')
+                .sort({ createdAt: -1 })
+                .limit(3),
+            Community.find({ type: 'success_story' })
+                .populate('author', 'name')
+                .sort({ createdAt: -1 })
+                .limit(2),
+            Post.find()
+                .populate("author", "name avatar")
+                .populate("answers")
+                .sort("-createdAt")
+                .limit(10)
+        ]);
 
         res.render("community", {
             user: req.session.user,
-            posts,
+            discussions,
+            successStories,
+            posts
         });
     } catch (err) {
-        console.error("Error fetching community posts:", err);
+        console.error("Error fetching community content:", err);
         res.render("community", {
             user: req.session.user,
-            error: "Failed to load community posts",
+            error: "Failed to load community content",
+            discussions: [],
+            successStories: [],
+            posts: []
         });
     }
 });
@@ -56,9 +65,13 @@ router.get("/:id", isAuthenticated, async (req, res) => {
             });
         }
 
+        // Get the answer count
+        const answerCount = post.answers ? post.answers.length : 0;
+
         res.render("question-detail", {
             user: req.session.user,
             post,
+            answerCount
         });
     } catch (err) {
         console.error("Error fetching question:", err);
@@ -69,38 +82,69 @@ router.get("/:id", isAuthenticated, async (req, res) => {
     }
 });
 
-// Create new question
+// Create new community content
 router.post("/", isAuthenticated, async (req, res) => {
     try {
-        const { title, content, tags } = req.body;
+        const { type, title, content, tags } = req.body;
+        
+        if (type === 'discussion' || type === 'success_story') {
+            // Convert tags string to array if it exists
+            const tagsArray = tags ? tags.split(',').map(tag => tag.trim()) : [];
+            
+            const newContent = new Community({
+                type,
+                title,
+                content,
+                tags: tagsArray,
+                author: req.session.user._id
+            });
 
-        const post = new Post({
-            title,
-            content,
-            tags: tags || [],
-            author: req.session.user._id,
-        });
+            await newContent.save();
+            return res.redirect('/community');
+        } else {
+            // Handle regular post creation
+            const post = new Post({
+                title,
+                content,
+                tags: tags ? tags.split(',').map(tag => tag.trim()) : [],
+                author: req.session.user._id,
+            });
 
-        await post.save();
-
-        res.redirect(`/community/${post._id}`);
-    } catch (err) {
-        console.error("Error creating question:", err);
-        res.render("community", {
+            await post.save();
+            return res.redirect(`/community/${post._id}`);
+        }
+    } catch (error) {
+        console.error('Error creating content:', error);
+        res.status(500).render("error", {
             user: req.session.user,
-            error: "Failed to create question",
+            error: "Error creating content: " + error.message
         });
     }
 });
 
 // Add answer to question
-// In your community controller (routes/community.js)
 router.post("/:id/answers", isAuthenticated, async (req, res) => {
     try {
-        const post = await Post.findById(req.params.id);
+        const post = await Post.findById(req.params.id)
+            .populate("author", "name avatar")
+            .populate({
+                path: "answers",
+                populate: {
+                    path: "author",
+                    select: "name avatar",
+                },
+                options: { sort: { isSolution: -1, createdAt: -1 } },
+            });
+
+        if (!post) {
+            return res.status(404).render("error", {
+                user: req.session.user,
+                error: "Question not found",
+            });
+        }
 
         // Check if user is the question author
-        if (post.author.toString() === req.session.user._id) {
+        if (post.author._id.toString() === req.session.user._id.toString()) {
             return res.status(403).render("question-detail", {
                 user: req.session.user,
                 post,
@@ -118,10 +162,30 @@ router.post("/:id/answers", isAuthenticated, async (req, res) => {
 
         await answer.save();
 
-        res.redirect(`/community/${req.params.id}`);
+        // Add the answer to the post's answers array
+        post.answers.push(answer._id);
+        await post.save();
+
+        // Get updated post with new answer
+        const updatedPost = await Post.findById(req.params.id)
+            .populate("author", "name avatar")
+            .populate({
+                path: "answers",
+                populate: {
+                    path: "author",
+                    select: "name avatar",
+                },
+                options: { sort: { isSolution: -1, createdAt: -1 } },
+            });
+
+        res.render("question-detail", {
+            user: req.session.user,
+            post: updatedPost,
+            answerCount: updatedPost.answers.length
+        });
     } catch (err) {
         console.error("Error adding answer:", err);
-        res.render("question-detail", {
+        res.render("error", {
             user: req.session.user,
             error: "Failed to add answer",
         });

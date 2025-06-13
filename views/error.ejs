@@ -1,0 +1,64 @@
+<%- include('partials/header-logged-in') %>
+
+<!-- Hero Section -->
+<section class="hero">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-lg-10 text-center">
+        <h1 class="display-3">Oops! <span class="text-gradient">Error</span></h1>
+        <p class="subtitle mb-4"><%= error %></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Error Section -->
+<section class="features py-6">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-lg-8">
+        <div class="community-card">
+          <div class="card-body text-center">
+            <i class="fas fa-exclamation-circle text-danger mb-3" style="font-size: 4rem;"></i>
+            <h3 class="mb-4">Something went wrong</h3>
+            <p class="mb-4"><%= error %></p>
+            <a href="/community" class="btn btn-primary">
+              <i class="fas fa-arrow-left me-2"></i>Back to Community
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<%- include('partials/footer') %>
+
+<style>
+.community-card {
+  background-color: var(--bs-card-bg);
+  border: 1px solid var(--bs-border-color);
+  border-radius: 1rem;
+  transition: all 0.3s ease;
+  color: var(--bs-body-color);
+}
+
+.community-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+.community-card .card-body {
+  padding: 2rem;
+}
+
+.community-card h3 {
+  color: var(--bs-primary);
+  margin-bottom: 1rem;
+}
+
+.community-card p {
+  color: var(--bs-body-color);
+  opacity: 0.8;
+}
+</style> 
