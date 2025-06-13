@@ -52,20 +52,9 @@
                 opacity: 0.8;
             }
 
-            .emergency-card .text-muted {
-                color: var(--bs-body-color) !important;
-                opacity: 0.7;
-            }
-
             .emergency-card .btn {
-                padding: 0.75rem 1.5rem;
+                padding: 0.5rem 1.5rem;
                 font-weight: 500;
-                transition: all 0.3s ease;
-            }
-
-            .emergency-card .btn:hover {
-                transform: translateY(-2px);
-                box-shadow: 0 4px 8px rgba(0,0,0,0.2);
             }
 
             .emergency-card .btn i {
@@ -84,43 +73,39 @@
                 color: var(--bs-light);
             }
 
-            .emergency-card .btn-danger {
-                background-color: var(--bs-danger);
-                border-color: var(--bs-danger);
+            .emergency-card .btn-outline-primary {
+                color: var(--bs-primary);
+                border-color: var(--bs-primary);
+            }
+
+            .emergency-card .btn-outline-primary:hover {
+                background-color: var(--bs-primary);
+                border-color: var(--bs-primary);
                 color: var(--bs-light);
             }
 
-            .emergency-card .btn-danger:hover {
-                background-color: var(--bs-danger-dark);
-                border-color: var(--bs-danger-dark);
+            .emergency-card .text-muted {
+                color: var(--bs-body-color) !important;
+                opacity: 0.7;
+            }
+
+            .emergency-card .list-group-item {
+                background-color: var(--bs-card-bg);
+                border-color: var(--bs-border-color);
+                color: var(--bs-body-color);
+            }
+
+            .emergency-card .list-group-item:hover {
+                background-color: var(--bs-primary);
                 color: var(--bs-light);
             }
 
-            /* Helpline List */
-            .emergency-card ul {
-                color: var(--bs-body-color);
-                list-style: none;
-                padding-left: 0;
-            }
-
-            .emergency-card ul li {
-                color: var(--bs-body-color);
-                margin-bottom: 0.5rem;
-            }
-
-            .emergency-card ul li i {
+            .emergency-card .list-group-item i {
                 color: var(--bs-primary);
-                margin-right: 0.5rem;
             }
 
-            .emergency-card ul li a {
-                color: var(--bs-body-color);
-                text-decoration: none;
-                transition: color 0.3s ease;
-            }
-
-            .emergency-card ul li a:hover {
-                color: var(--bs-primary);
+            .emergency-card .list-group-item:hover i {
+                color: var(--bs-light);
             }
 
             #backToTop {
@@ -198,58 +183,73 @@
                 <div class="row justify-content-center">
                     <div class="col-lg-10 text-center">
                         <h1 class="display-3">Emergency <span class="text-gradient">Support</span></h1>
-                        <p class="subtitle mb-4">Immediate help is available 24/7</p>
+                        <p class="subtitle mb-4">Immediate help and resources when you need them most</p>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- Emergency Contacts -->
+        <!-- Emergency Resources -->
         <section class="features py-6">
             <div class="container">
                 <div class="row justify-content-center">
                     <div class="col-lg-8">
-                        <!-- Crisis Hotline -->
-                        <div class="emergency-card mb-4">
-                            <div class="card-body">
-                                <h3><i class="fas fa-phone-alt me-2"></i>National Crisis Hotline</h3>
-                                <p>Available 24/7 for immediate support and crisis intervention</p>
-                                <a href="tel:988" class="btn btn-primary">
-                                    <i class="fas fa-phone"></i>Call 988
-                                </a>
-                            </div>
-                        </div>
-
-                        <!-- Emergency Services -->
-                        <div class="emergency-card mb-4">
-                            <div class="card-body">
-                                <h3><i class="fas fa-ambulance me-2"></i>Emergency Services</h3>
-                                <p>For life-threatening emergencies, call emergency services immediately</p>
-                                <a href="tel:911" class="btn btn-danger">
-                                    <i class="fas fa-phone"></i>Call 911
-                                </a>
-                            </div>
-                        </div>
-
-                        <!-- Crisis Text Line -->
-                        <div class="emergency-card mb-4">
-                            <div class="card-body">
-                                <h3><i class="fas fa-comment-alt me-2"></i>Crisis Text Line</h3>
-                                <p>Text HOME to 741741 to connect with a Crisis Counselor</p>
-                                <a href="sms:741741&body=HOME" class="btn btn-primary">
-                                    <i class="fas fa-comment"></i>Text HOME to 741741
-                                </a>
-                            </div>
-                        </div>
-
-                        <!-- Local Resources -->
                         <div class="emergency-card">
                             <div class="card-body">
-                                <h3><i class="fas fa-hospital me-2"></i>Local Resources</h3>
-                                <p>Find mental health professionals and crisis centers in your area</p>
-                                <a href="https://www.samhsa.gov/find-help/national-helpline" target="_blank" class="btn btn-primary">
-                                    <i class="fas fa-search"></i>Find Local Help
-                                </a>
+                                <h3 class="text-center mb-4">Emergency Helplines</h3>
+                                <div class="list-group">
+                                    <a href="tel:911" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
+                                        <span>Emergency Services (911)</span>
+                                        <i class="fas fa-phone"></i>
+                                    </a>
+                                    <a href="tel:988" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
+                                        <span>Suicide Prevention Lifeline (988)</span>
+                                        <i class="fas fa-phone"></i>
+                                    </a>
+                                    <a href="tel:18002738255" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
+                                        <span>Substance Abuse Helpline (1-800-273-8255)</span>
+                                        <i class="fas fa-phone"></i>
+                                    </a>
+                                    <a href="tel:18007997233" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
+                                        <span>National Domestic Violence Hotline (1-800-799-7233)</span>
+                                        <i class="fas fa-phone"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="emergency-card">
+                            <div class="card-body">
+                                <h3 class="text-center mb-4">Crisis Resources</h3>
+                                <div class="list-group">
+                                    <a href="https://www.crisistextline.org" target="_blank" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
+                                        <span>Crisis Text Line (Text HOME to 741741)</span>
+                                        <i class="fas fa-external-link-alt"></i>
+                                    </a>
+                                    <a href="https://www.samhsa.gov/find-help/national-helpline" target="_blank" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
+                                        <span>SAMHSA's National Helpline</span>
+                                        <i class="fas fa-external-link-alt"></i>
+                                    </a>
+                                    <a href="https://www.thetrevorproject.org" target="_blank" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
+                                        <span>The Trevor Project (LGBTQ+ Support)</span>
+                                        <i class="fas fa-external-link-alt"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="emergency-card">
+                            <div class="card-body">
+                                <h3 class="text-center mb-4">Local Resources</h3>
+                                <p class="text-center text-muted mb-4">Find mental health professionals and crisis centers in your area</p>
+                                <div class="text-center">
+                                    <a href="https://www.psychologytoday.com/us/therapists" target="_blank" class="btn btn-primary me-2">
+                                        <i class="fas fa-search me-2"></i>Find a Therapist
+                                    </a>
+                                    <a href="https://www.nami.org/help" target="_blank" class="btn btn-outline-primary">
+                                        <i class="fas fa-info-circle me-2"></i>NAMI Resources
+                                    </a>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -285,4 +285,4 @@
             });
         </script>
     </body>
-</html> 
+</html>

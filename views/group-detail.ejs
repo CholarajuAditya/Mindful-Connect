@@ -80,11 +80,6 @@
   </div>
 </section>
 
-<!-- Back to Top Button -->
-<button id="backToTop" aria-label="Back to top">
-  <i class="fas fa-arrow-up"></i>
-</button>
-
 <%- include('partials/footer') %>
 
 <style>
@@ -174,41 +169,10 @@
   border-radius: 1rem;
   border-top-left-radius: 0;
 }
-
-#backToTop {
-  position: fixed;
-  bottom: 20px;
-  right: 20px;
-  width: 40px;
-  height: 40px;
-  background-color: var(--bs-primary);
-  color: var(--bs-light);
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  opacity: 0;
-  transition: all 0.3s ease;
-  z-index: 1000;
-  border: none;
-  padding: 0;
-  font-size: 1.2rem;
-}
-
-#backToTop.visible {
-  opacity: 1;
-}
-
-#backToTop:hover {
-  background-color: var(--bs-primary-dark);
-  transform: translateY(-3px);
-}
 </style>
 
 <script>
 document.addEventListener('DOMContentLoaded', function() {
-  const backToTop = document.getElementById('backToTop');
   const chatContainer = document.getElementById('chatContainer');
   const messageForm = document.getElementById('messageForm');
   const messageInput = document.getElementById('messageInput');
@@ -216,22 +180,6 @@ document.addEventListener('DOMContentLoaded', function() {
   // Scroll chat to bottom
   chatContainer.scrollTop = chatContainer.scrollHeight;
   
-  // Back to top button
-  window.addEventListener('scroll', () => {
-    if (window.pageYOffset > 300) {
-      backToTop.classList.add('visible');
-    } else {
-      backToTop.classList.remove('visible');
-    }
-  });
-  
-  backToTop.addEventListener('click', () => {
-    window.scrollTo({
-      top: 0,
-      behavior: 'smooth'
-    });
-  });
-
   // Handle message sending
   messageForm.addEventListener('submit', async (e) => {
     e.preventDefault();
